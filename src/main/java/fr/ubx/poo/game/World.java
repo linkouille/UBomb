@@ -49,8 +49,16 @@ public class World {
         grid.put(position, decor);
     }
 
+    public void setGO(Position position, GameObject g) {
+        gameObjects.put(position, g);
+    }
+
     public void clear(Position position) {
         grid.remove(position);
+    }
+
+    public void clearGO(Position position) {
+        gameObjects.remove(position);
     }
 
     public void forEachDecor(BiConsumer<Position, Decor> fn) {
