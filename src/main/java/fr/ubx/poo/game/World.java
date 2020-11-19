@@ -5,6 +5,7 @@
 package fr.ubx.poo.game;
 
 import fr.ubx.poo.model.decor.Decor;
+import fr.ubx.poo.model.go.GameObject;
 
 import java.util.Collection;
 import java.util.Map;
@@ -15,10 +16,14 @@ public class World {
     private final WorldEntity[][] raw;
     public final Dimension dimension;
 
-    public World(WorldEntity[][] raw) {
+    //Not Final cause Some Gameobject like Box could be moving
+    private Map<Position, GameObject> gameObjects;
+
+    public World(WorldEntity[][] raw, Game game) {
         this.raw = raw;
         dimension = new Dimension(raw.length, raw[0].length);
-        grid = WorldBuilder.build(raw, dimension);
+        grid = WorldBuilder.buildDecor(raw, dimension);
+        gameObjects = WorldBuilder.buildGameObject(raw,dimension,game);
     }
 
     public Position findPlayer() throws PositionNotFoundException {
@@ -36,6 +41,10 @@ public class World {
         return grid.get(position);
     }
 
+    public GameObject getGO(Position position) {
+        return gameObjects.get(position);
+    }
+
     public void set(Position position, Decor decor) {
         grid.put(position, decor);
     }
@@ -44,8 +53,12 @@ public class World {
         grid.remove(position);
     }
 
-    public void forEach(BiConsumer<Position, Decor> fn) {
+    public void forEachDecor(BiConsumer<Position, Decor> fn) {
         grid.forEach(fn);
+    }
+
+    public void forEachGameObject(BiConsumer<Position, GameObject> fn) {
+        gameObjects.forEach(fn);
     }
 
     public Collection<Decor> values() {

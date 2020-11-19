@@ -67,7 +67,10 @@ public final class GameEngine {
         root.getChildren().add(layer);
         statusBar = new StatusBar(root, sceneWidth, sceneHeight, game);
         // Create decor sprites
-        game.getWorld().forEach( (pos,d) -> sprites.add(SpriteFactory.createDecor(layer, pos, d)));
+        game.getWorld().forEachDecor( (pos,d) -> sprites.add(SpriteFactory.createDecor(layer, pos, d)));
+
+        game.getWorld().forEachGameObject((pos,g) -> sprites.add(SpriteFactory.createGameObject(layer, pos,g)));
+
         spritePlayer = SpriteFactory.createPlayer(layer, player);
 
     }

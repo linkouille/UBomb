@@ -21,7 +21,7 @@ public class Game {
     public int initPlayerLives;
 
     public Game(String worldPath) {
-        world = new WorldStatic();
+        world = new WorldStatic(this);
         this.worldPath = worldPath;
         loadConfig(worldPath);
         Position positionPlayer = null;

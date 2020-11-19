@@ -10,6 +10,8 @@ import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.Decor;
 import fr.ubx.poo.model.decor.Stone;
 import fr.ubx.poo.model.decor.Tree;
+import fr.ubx.poo.model.go.Box;
+import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Player;
 import fr.ubx.poo.view.image.ImageFactory;
 import javafx.scene.layout.Pane;
@@ -23,6 +25,16 @@ public final class SpriteFactory {
             return new SpriteDecor(layer, factory.get(STONE), position);
         if (decor instanceof Tree)
             return new SpriteDecor(layer, factory.get(TREE), position);
+        return null;
+    }
+
+    //TODO
+    public static Sprite createGameObject(Pane layer, Position position, GameObject gameObject){
+        ImageFactory factory = ImageFactory.getInstance();
+
+        if(gameObject instanceof Box)
+            return new SpriteBox(layer,factory.get(BOX),gameObject);
+
         return null;
     }
 
