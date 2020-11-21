@@ -5,6 +5,8 @@ import fr.ubx.poo.model.decor.Stone;
 import fr.ubx.poo.model.decor.Tree;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
+import fr.ubx.poo.model.go.character.Monster;
+import fr.ubx.poo.model.go.character.Princess;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -57,6 +59,10 @@ public class WorldBuilder {
         switch (entity) {
             case Box:
                 return new Box(game,position);
+            case Princess:
+                return new Princess(game, position);
+            case Monster:
+                return new Monster(game, position);
             default:
                 return null;
         }

@@ -12,9 +12,14 @@ import static fr.ubx.poo.view.image.ImageResource.*;
 public final class ImageFactory {
     private final Image[] images;
 
-    private final ImageResource[] directions = new ImageResource[]{
+    private final ImageResource[] directionsP = new ImageResource[]{
             // Direction { N, E, S, W }
             PLAYER_UP, PLAYER_RIGHT, PLAYER_DOWN, PLAYER_LEFT,
+    };
+
+    private final ImageResource[] directionsM = new ImageResource[]{
+            // Direction { N, E, S, W }
+            MONSTER_UP, MONSTER_RIGHT, MONSTER_DOWN, MONSTER_LEFT,
     };
 
     private final ImageResource[] digits = new ImageResource[]{
@@ -54,8 +59,10 @@ public final class ImageFactory {
     }
 
     public Image getPlayer(Direction direction) {
-        return get(directions[direction.ordinal()]);
+        return get(directionsP[direction.ordinal()]);
     }
+
+    public Image getMonster(Direction direction){ return get(directionsM[direction.ordinal()]); }
 
     /**
      * Holder

@@ -12,7 +12,9 @@ import fr.ubx.poo.model.decor.Stone;
 import fr.ubx.poo.model.decor.Tree;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
+import fr.ubx.poo.model.go.character.Monster;
 import fr.ubx.poo.model.go.character.Player;
+import fr.ubx.poo.model.go.character.Princess;
 import fr.ubx.poo.view.image.ImageFactory;
 import javafx.scene.layout.Pane;
 
@@ -34,6 +36,11 @@ public final class SpriteFactory {
 
         if(gameObject instanceof Box)
             return new SpriteBox(layer,factory.get(BOX),gameObject);
+        if(gameObject instanceof Princess)
+            return new SpritePrincess(layer, factory.get(PRINCESS), gameObject);
+        if(gameObject instanceof Monster)
+            return new SpriteMonster(layer,factory.get(MONSTER_LEFT), gameObject);
+
 
         return null;
     }
