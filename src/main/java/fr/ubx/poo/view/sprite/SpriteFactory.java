@@ -7,10 +7,7 @@ package fr.ubx.poo.view.sprite;
 import static fr.ubx.poo.view.image.ImageResource.*;
 
 import fr.ubx.poo.game.Position;
-import fr.ubx.poo.model.decor.Decor;
-import fr.ubx.poo.model.decor.Princess;
-import fr.ubx.poo.model.decor.Stone;
-import fr.ubx.poo.model.decor.Tree;
+import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
@@ -29,6 +26,8 @@ public final class SpriteFactory {
             return new SpriteDecor(layer, factory.get(TREE), position);
         if(decor instanceof Princess)
             return new SpriteDecor(layer, factory.get(PRINCESS), position);
+        if(decor instanceof Door)
+            return new SpriteDoor(layer,null, position, ((Door)decor).isState());
 
         return null;
     }

@@ -1,9 +1,6 @@
 package fr.ubx.poo.game;
 
-import fr.ubx.poo.model.decor.Decor;
-import fr.ubx.poo.model.decor.Princess;
-import fr.ubx.poo.model.decor.Stone;
-import fr.ubx.poo.model.decor.Tree;
+import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
@@ -53,6 +50,11 @@ public class WorldBuilder {
                 return new Tree();
             case Princess:
                 return new Princess();
+            case DoorNextClosed:
+                return new Door(false);
+            case DoorNextOpened:
+            case DoorPrevOpened:
+                return  new Door(true);
             default:
                 return null;
         }
