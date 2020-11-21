@@ -8,6 +8,7 @@ import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.Movable;
 import fr.ubx.poo.model.decor.Decor;
+import fr.ubx.poo.model.decor.Princess;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.game.Game;
@@ -49,7 +50,7 @@ public class Player extends GameObject implements Movable {
             return false;
 
         Decor d = game.getWorld().get(p);
-        if(d != null)
+        if(d != null && !(d instanceof Princess))
             return false;
 
         // In the next position we have a GameObject
