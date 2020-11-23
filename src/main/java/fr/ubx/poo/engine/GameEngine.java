@@ -6,6 +6,7 @@ package fr.ubx.poo.engine;
 
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.view.sprite.Sprite;
+import fr.ubx.poo.view.sprite.SpriteDoor;
 import fr.ubx.poo.view.sprite.SpriteFactory;
 import fr.ubx.poo.game.Game;
 import fr.ubx.poo.model.go.character.Player;
@@ -147,6 +148,7 @@ public final class GameEngine {
 
     private void render() {
         sprites.forEach(Sprite::render);
+
         // last rendering to have player in the foreground
         spritePlayer.render();
     }

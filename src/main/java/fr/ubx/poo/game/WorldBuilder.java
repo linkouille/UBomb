@@ -4,6 +4,7 @@ import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
+import fr.ubx.poo.model.go.collectable.Key;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -55,6 +56,7 @@ public class WorldBuilder {
             case DoorNextOpened:
             case DoorPrevOpened:
                 return  new Door(true);
+
             default:
                 return null;
         }
@@ -65,6 +67,8 @@ public class WorldBuilder {
                 return new Box(game,position);
             case Monster:
                 return new Monster(game, position);
+            case Key:
+                return new Key(game, position);
             default:
                 return null;
         }

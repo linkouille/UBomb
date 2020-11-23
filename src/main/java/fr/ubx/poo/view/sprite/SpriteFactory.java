@@ -12,6 +12,7 @@ import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
 import fr.ubx.poo.model.go.character.Player;
+import fr.ubx.poo.model.go.collectable.Key;
 import fr.ubx.poo.view.image.ImageFactory;
 import javafx.scene.layout.Pane;
 
@@ -27,7 +28,7 @@ public final class SpriteFactory {
         if(decor instanceof Princess)
             return new SpriteDecor(layer, factory.get(PRINCESS), position);
         if(decor instanceof Door)
-            return new SpriteDoor(layer,null, position, ((Door)decor).isState());
+            return new SpriteDoor(layer,null, position, ((Door)decor));
 
         return null;
     }
@@ -40,7 +41,8 @@ public final class SpriteFactory {
             return new SpriteBox(layer,factory.get(BOX),gameObject);
         if(gameObject instanceof Monster)
             return new SpriteMonster(layer,factory.get(MONSTER_LEFT), gameObject);
-
+        if(gameObject instanceof Key)
+            return new SpriteKey(layer, factory.get(KEY), gameObject);
 
         return null;
     }

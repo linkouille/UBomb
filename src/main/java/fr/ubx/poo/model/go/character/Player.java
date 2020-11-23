@@ -13,6 +13,8 @@ import fr.ubx.poo.model.decor.Princess;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.game.Game;
+import fr.ubx.poo.model.go.collectable.Collectable;
+import fr.ubx.poo.model.go.collectable.Key;
 
 public class Player extends GameObject implements Movable {
 
@@ -21,6 +23,8 @@ public class Player extends GameObject implements Movable {
     private boolean moveRequested = false;
     private int lives = 1;
     private boolean winner;
+
+    private int keys;
 
     public Player(Game game, Position position) {
         super(game, position);
@@ -34,6 +38,14 @@ public class Player extends GameObject implements Movable {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public int getKeys() {
+        return keys;
+    }
+
+    public void addKeys(int keys) {
+        this.keys += keys;
     }
 
     public void requestMove(Direction direction) {
@@ -62,6 +74,12 @@ public class Player extends GameObject implements Movable {
                     ((Box) g).doMove(direction);
                 else
                     return false;
+            if(g instanceof Collectable)
+            {
+                ((Collectable) g).pickUp();
+                System.out.println("Picked up Collectable" + g);
+            }
+
         }
 
         return true;
