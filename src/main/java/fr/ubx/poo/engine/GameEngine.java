@@ -118,6 +118,9 @@ public final class GameEngine {
         if (input.isMoveUp()) {
             player.requestMove(Direction.N);
         }
+        if(input.isBomb()){
+            player.Act();
+        }
         input.clear();
     }
 

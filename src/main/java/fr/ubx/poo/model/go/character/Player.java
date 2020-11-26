@@ -7,9 +7,7 @@ package fr.ubx.poo.model.go.character;
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.Movable;
-import fr.ubx.poo.model.decor.Decor;
-import fr.ubx.poo.model.decor.Door;
-import fr.ubx.poo.model.decor.Princess;
+import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.game.Game;
@@ -25,6 +23,9 @@ public class Player extends GameObject implements Movable {
     private boolean winner;
 
     private int keys;
+
+    private boolean isNearDoor;
+    private Door prevDoor;
 
     public Player(Game game, Position position) {
         super(game, position);
@@ -48,6 +49,10 @@ public class Player extends GameObject implements Movable {
         this.keys += keys;
     }
 
+    public boolean isNearDoor() {
+        return isNearDoor;
+    }
+
     public void requestMove(Direction direction) {
         if (direction != this.direction) {
             this.direction = direction;
@@ -55,16 +60,39 @@ public class Player extends GameObject implements Movable {
         moveRequested = true;
     }
 
+    public void Act(){
+        //Called if space is pressed
+        Position p = this.direction.nextPosition(this.getPosition());
+
+        Decor d = game.getWorld().get(p);
+
+        if(keys > 0 && d instanceof Door && !((Door) d).isState()){
+            ((Door) d).setState(true);
+            keys --;
+        }
+
+    }
+
     @Override
     public boolean canMove(Direction direction) {
         Position p = direction.nextPosition(this.getPosition());
-
         if(!game.getWorld().isInside(p))
             return false;
 
         Decor d = game.getWorld().get(p);
-        if(d != null && !(d instanceof Princess) && !(d instanceof Door))
-            return false;
+        if(d != null){
+            if(d instanceof Stone || d instanceof Tree)
+                return false;
+            if(d instanceof Door){
+                if(((Door) d).isState()){
+                    //TODO CALL ENXT LEVEL METHOD
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+        }
 
         // In the next position we have a GameObject
         GameObject g = game.getWorld().getGO(p);
@@ -77,7 +105,6 @@ public class Player extends GameObject implements Movable {
             if(g instanceof Key)
             {
                 ((Key) g).pickUp(this);
-                System.out.println("Picked up Key" + g);
             }
 
         }
