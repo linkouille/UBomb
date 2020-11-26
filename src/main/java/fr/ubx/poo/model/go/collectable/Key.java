@@ -6,22 +6,17 @@ import fr.ubx.poo.model.decor.Door;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Player;
 
-public class Key extends GameObject implements Collectable {
+public class Key extends GameObject {
 
     public Key(Game game, Position position) {
         super(game, position);
     }
 
-    @Override
-    public void pickUp() {
-        game.getWorld().clearGO(getPosition());
+    public void pickUp(Player p) {
 
-        Position p = new Position(99999, 99999);
-        game.getWorld().setGO(p , this);
-        setPosition(p);
-    }
-
-    public void effect(Player p) {
         p.addKeys(1);
+        destroy();
+
+
     }
 }

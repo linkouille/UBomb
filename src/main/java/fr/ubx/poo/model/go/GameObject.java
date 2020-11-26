@@ -15,6 +15,15 @@ public abstract class GameObject extends Entity {
     protected final Game game;
     private Position position;
 
+    private boolean dead;
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
 
     public Position getPosition() {
         return position;
@@ -28,4 +37,11 @@ public abstract class GameObject extends Entity {
         this.game = game;
         this.position = position;
     }
+
+    public void destroy(){
+        game.getWorld().clearGO(getPosition());
+        dead = true;
+    }
+
+
 }

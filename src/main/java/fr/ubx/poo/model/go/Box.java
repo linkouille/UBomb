@@ -13,7 +13,7 @@ public class Box extends GameObject implements Movable {
     @Override
     public boolean canMove(Direction direction) {
         Position p = direction.nextPosition(this.getPosition());
-        return game.getWorld().isInside(p) && game.getWorld().get(p) == null && (game.getWorld().getGO(p) == null);
+        return game.getWorld().isInside(p) && game.getWorld().get(p) == null && !(game.getWorld().getGO(p) instanceof Box);
     }
 
     @Override

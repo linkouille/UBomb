@@ -5,11 +5,14 @@
 package fr.ubx.poo.engine;
 
 import fr.ubx.poo.game.Direction;
+import fr.ubx.poo.game.Position;
+import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.view.sprite.Sprite;
 import fr.ubx.poo.view.sprite.SpriteDoor;
 import fr.ubx.poo.view.sprite.SpriteFactory;
 import fr.ubx.poo.game.Game;
 import fr.ubx.poo.model.go.character.Player;
+import fr.ubx.poo.view.sprite.SpriteGameObject;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -23,6 +26,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -38,6 +43,9 @@ public final class GameEngine {
     private Input input;
     private Stage stage;
     private Sprite spritePlayer;
+
+    //Not Final because gameObject could move;
+    private List<Sprite> spritesGO = new ArrayList<>();
 
     public GameEngine(final String windowTitle, Game game, final Stage stage) {
         this.windowTitle = windowTitle;
@@ -70,7 +78,7 @@ public final class GameEngine {
         // Create decor sprites
         game.getWorld().forEachDecor( (pos,d) -> sprites.add(SpriteFactory.createDecor(layer, pos, d)));
 
-        game.getWorld().forEachGameObject((pos,g) -> sprites.add(SpriteFactory.createGameObject(layer, pos,g)));
+        game.getWorld().forEachGameObject((pos,g) -> spritesGO.add(SpriteFactory.createGameObject(layer, pos,g)));
 
         spritePlayer = SpriteFactory.createPlayer(layer, player);
 
@@ -136,7 +144,7 @@ public final class GameEngine {
     private void update(long now) {
         player.update(now);
 
-        if (player.isAlive() == false) {
+        if (!player.isAlive()) {
             gameLoop.stop();
             showMessage("Perdu!", Color.RED);
         }
@@ -145,9 +153,19 @@ public final class GameEngine {
             showMessage("Gagné", Color.BLUE);
         }
     }
-
     private void render() {
+
+        Iterator<Sprite> it = spritesGO.iterator();
+        while (it.hasNext()){
+            Sprite sprite = it.next();
+            if(((SpriteGameObject)sprite).getGo().isDead()) {
+                sprite.remove();
+                it.remove();
+            }
+        }
+
         sprites.forEach(Sprite::render);
+        spritesGO.forEach(Sprite::render);
 
         // last rendering to have player in the foreground
         spritePlayer.render();

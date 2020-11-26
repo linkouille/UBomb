@@ -13,12 +13,12 @@ import fr.ubx.poo.model.decor.Princess;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.game.Game;
-import fr.ubx.poo.model.go.collectable.Collectable;
 import fr.ubx.poo.model.go.collectable.Key;
 
 public class Player extends GameObject implements Movable {
 
-    private final boolean alive = true;
+    private boolean alive = true;
+
     Direction direction;
     private boolean moveRequested = false;
     private int lives = 1;
@@ -74,10 +74,10 @@ public class Player extends GameObject implements Movable {
                     ((Box) g).doMove(direction);
                 else
                     return false;
-            if(g instanceof Collectable)
+            if(g instanceof Key)
             {
-                ((Collectable) g).pickUp();
-                System.out.println("Picked up Collectable" + g);
+                ((Key) g).pickUp(this);
+                System.out.println("Picked up Key" + g);
             }
 
         }
