@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import fr.ubx.poo.engine.GameEngine;
 import fr.ubx.poo.model.go.character.Player;
 
 public class Game {
@@ -19,6 +20,7 @@ public class Game {
     private final Player player;
     private final String worldPath;
     public int initPlayerLives;
+    private GameEngine engine;
 
     public Game(String worldPath) {
         world = new WorldStatic(this);
@@ -57,5 +59,11 @@ public class Game {
         return this.player;
     }
 
+    public GameEngine getEngine() {
+        return engine;
+    }
 
+    public void setEngine(GameEngine engine) {
+        this.engine = engine;
+    }
 }

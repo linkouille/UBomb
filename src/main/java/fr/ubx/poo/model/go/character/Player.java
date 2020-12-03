@@ -60,7 +60,7 @@ public class Player extends GameObject implements Movable {
         moveRequested = true;
     }
 
-    public void Act(){
+    public void Act(long now){
         //Called if space is pressed
         Position p = this.direction.nextPosition(this.getPosition());
 
@@ -69,6 +69,10 @@ public class Player extends GameObject implements Movable {
         if(keys > 0 && d instanceof Door && !((Door) d).isState()){
             ((Door) d).setState(true);
             keys --;
+        }else{
+            if(game.getWorld().getGO(this.getPosition()) == null)
+                game.getEngine().createBombGameObject(getPosition(), now);
+
         }
 
     }

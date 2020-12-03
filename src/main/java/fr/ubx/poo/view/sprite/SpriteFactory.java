@@ -8,6 +8,7 @@ import static fr.ubx.poo.view.image.ImageResource.*;
 
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.*;
+import fr.ubx.poo.model.go.Bomb;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
@@ -49,5 +50,9 @@ public final class SpriteFactory {
 
     public static Sprite createPlayer(Pane layer, Player player) {
         return new SpritePlayer(layer, player);
+    }
+
+    public static Sprite createBomb(Pane layer, Bomb bomb) {
+        return new SpriteBomb(layer, bomb);
     }
 }

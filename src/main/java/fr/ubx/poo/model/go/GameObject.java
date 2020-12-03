@@ -39,8 +39,12 @@ public abstract class GameObject extends Entity {
     }
 
     public void destroy(){
-        game.getWorld().clearGO(getPosition());
+        // game.getWorld().clearGO(getPosition());
         dead = true;
+    }
+
+    public void update(long now){
+
     }
 
 

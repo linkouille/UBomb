@@ -6,17 +6,17 @@ package fr.ubx.poo.engine;
 
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
+import fr.ubx.poo.model.go.Bomb;
 import fr.ubx.poo.model.go.GameObject;
-import fr.ubx.poo.view.sprite.Sprite;
-import fr.ubx.poo.view.sprite.SpriteDoor;
-import fr.ubx.poo.view.sprite.SpriteFactory;
+import fr.ubx.poo.view.image.ImageFactory;
+import fr.ubx.poo.view.sprite.*;
 import fr.ubx.poo.game.Game;
 import fr.ubx.poo.model.go.character.Player;
-import fr.ubx.poo.view.sprite.SpriteGameObject;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -50,6 +50,7 @@ public final class GameEngine {
     public GameEngine(final String windowTitle, Game game, final Stage stage) {
         this.windowTitle = windowTitle;
         this.game = game;
+        game.setEngine(this);
         this.player = game.getPlayer();
         initialize(stage, game);
         buildAndSetGameLoop();
@@ -119,7 +120,7 @@ public final class GameEngine {
             player.requestMove(Direction.N);
         }
         if(input.isBomb()){
-            player.Act();
+            player.Act(now);
         }
         input.clear();
     }
@@ -147,6 +148,8 @@ public final class GameEngine {
     private void update(long now) {
         player.update(now);
 
+        game.getWorld().forEachGameObject((pos,g) -> g.update(now));
+
         if (!player.isAlive()) {
             gameLoop.stop();
             showMessage("Perdu!", Color.RED);
@@ -162,8 +165,9 @@ public final class GameEngine {
         while (it.hasNext()){
             Sprite sprite = it.next();
             if(((SpriteGameObject)sprite).getGo().isDead()) {
-                sprite.remove();
+                game.getWorld().clearGO (((SpriteGameObject)sprite).getGo().getPosition());
                 it.remove();
+                sprite.remove();
             }
         }
 
@@ -177,4 +181,12 @@ public final class GameEngine {
     public void start() {
         gameLoop.start();
     }
+
+    public void createBombGameObject(Position pos, long now){
+        Bomb b = new Bomb(game,pos,now);
+        game.getWorld().setGO(pos, b);
+        spritesGO.add(SpriteFactory.createBomb(layer,b));
+
+    }
+
 }
