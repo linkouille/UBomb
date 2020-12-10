@@ -31,7 +31,7 @@ public final class SpriteFactory {
         if(decor instanceof Door)
             return new SpriteDoor(layer,null, position, ((Door)decor));
 
-        return null;
+        throw new RuntimeException("Invalid Sprite");
     }
 
     //TODO
@@ -45,7 +45,7 @@ public final class SpriteFactory {
         if(gameObject instanceof Key)
             return new SpriteKey(layer, factory.get(KEY), gameObject);
 
-        return null;
+        throw new RuntimeException("Invalid Sprite");
     }
 
     public static Sprite createPlayer(Pane layer, Player player) {

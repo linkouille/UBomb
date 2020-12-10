@@ -10,4 +10,5 @@ public class Tree extends Decor {
     public String toString() {
         return "Tree";
     }
+
 }

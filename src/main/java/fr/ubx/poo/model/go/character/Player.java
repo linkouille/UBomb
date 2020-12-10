@@ -11,6 +11,7 @@ import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.game.Game;
+import fr.ubx.poo.model.go.collectable.Collectable;
 import fr.ubx.poo.model.go.collectable.Key;
 
 public class Player extends GameObject implements Movable {
@@ -27,10 +28,13 @@ public class Player extends GameObject implements Movable {
     private boolean isNearDoor;
     private Door prevDoor;
 
+    private boolean placeBomb;
+
     public Player(Game game, Position position) {
         super(game, position);
         this.direction = Direction.S;
         this.lives = game.getInitPlayerLives();
+        this.placeBomb = false;
     }
 
     public int getLives() {
@@ -53,6 +57,14 @@ public class Player extends GameObject implements Movable {
         return isNearDoor;
     }
 
+    public boolean isPlaceBomb() {
+        return placeBomb;
+    }
+
+    public void setPlaceBomb(boolean placeBomb) {
+        this.placeBomb = placeBomb;
+    }
+
     public void requestMove(Direction direction) {
         if (direction != this.direction) {
             this.direction = direction;
@@ -71,7 +83,7 @@ public class Player extends GameObject implements Movable {
             keys --;
         }else{
             if(game.getWorld().getGO(this.getPosition()) == null)
-                game.getEngine().createBombGameObject(getPosition(), now);
+                placeBomb = true;
 
         }
 
@@ -85,30 +97,25 @@ public class Player extends GameObject implements Movable {
 
         Decor d = game.getWorld().get(p);
         if(d != null){
-            if(d instanceof Stone || d instanceof Tree)
-                return false;
-            if(d instanceof Door){
-                if(((Door) d).isState()){
-                    //TODO CALL ENXT LEVEL METHOD
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-
+            return d.canWalkOn();
         }
 
         // In the next position we have a GameObject
         GameObject g = game.getWorld().getGO(p);
         if(g != null){
-            if(g instanceof Box)
-                if(((Box)g).canMove(direction))
-                    ((Box) g).doMove(direction);
-                else
-                    return false;
-            if(g instanceof Key)
-            {
-                ((Key) g).pickUp(this);
+            if(g.isMovable()){
+                Movable m = (Movable) g;
+                if(m.canMove(direction)){
+                    m.doMove(direction);
+                    return true;
+                }
+                return false;
+            }else if(g.isCollectable()){
+                Collectable c = (Collectable) g;
+                c.pickUp(this);
+            }
+            else{
+                return g.canWalkOn();
             }
 
         }
@@ -136,6 +143,10 @@ public class Player extends GameObject implements Movable {
 
     public boolean isAlive() {
         return alive;
+    }
+
+    public boolean isMovable(){
+        return true;
     }
 
 }

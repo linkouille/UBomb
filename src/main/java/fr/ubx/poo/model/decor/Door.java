@@ -20,4 +20,9 @@ public class Door extends Decor {
     public String toString() {
         return "Princess";
     }
+
+    @Override
+    public boolean canWalkOn() {
+        return state;
+    }
 }

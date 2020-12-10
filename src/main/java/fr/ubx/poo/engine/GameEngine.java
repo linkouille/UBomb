@@ -50,7 +50,6 @@ public final class GameEngine {
     public GameEngine(final String windowTitle, Game game, final Stage stage) {
         this.windowTitle = windowTitle;
         this.game = game;
-        game.setEngine(this);
         this.player = game.getPlayer();
         initialize(stage, game);
         buildAndSetGameLoop();
@@ -157,6 +156,11 @@ public final class GameEngine {
         if (player.isWinner()) {
             gameLoop.stop();
             showMessage("Gagné", Color.BLUE);
+        }
+
+        if(player.isPlaceBomb()){
+            createBombGameObject(player.getPosition(), now);
+            player.setPlaceBomb(false);
         }
     }
     private void render() {

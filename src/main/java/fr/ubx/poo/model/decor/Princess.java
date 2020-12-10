@@ -5,4 +5,7 @@ public class Princess extends Decor {
     public String toString() {
         return "Princess";
     }
+    public boolean canWalkOn(){
+        return true;
+    }
 }

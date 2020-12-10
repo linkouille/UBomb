@@ -47,5 +47,14 @@ public abstract class GameObject extends Entity {
 
     }
 
+    public boolean isMovable(){
+        //Can be pushed or not (Box)
+        return false;
+    }
+
+    public boolean isCollectable(){
+        //Can e collected (Key, bonus, Malus)
+        return false;
+    }
 
 }

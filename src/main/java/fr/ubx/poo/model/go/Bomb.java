@@ -10,6 +10,8 @@ public class Bomb extends GameObject{
 
     private Timer timer;
 
+    private int range;
+
     public int getState() {
         return state;
     }
@@ -39,5 +41,8 @@ public class Bomb extends GameObject{
         if(this.timer.isFinished())
             this.destroy();
 
+    }
+    public boolean canWalkOn(){
+        return true;
     }
 }

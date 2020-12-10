@@ -9,4 +9,5 @@ public class Stone extends Decor {
     public String toString() {
         return "Stone";
     }
+
 }

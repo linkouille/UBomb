@@ -20,7 +20,6 @@ public class Game {
     private final Player player;
     private final String worldPath;
     public int initPlayerLives;
-    private GameEngine engine;
 
     public Game(String worldPath) {
         world = new WorldStatic(this);
@@ -59,11 +58,4 @@ public class Game {
         return this.player;
     }
 
-    public GameEngine getEngine() {
-        return engine;
-    }
-
-    public void setEngine(GameEngine engine) {
-        this.engine = engine;
-    }
 }

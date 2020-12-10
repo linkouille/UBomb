@@ -4,6 +4,7 @@ import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Game;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.Movable;
+import fr.ubx.poo.model.decor.Decor;
 
 public class Box extends GameObject implements Movable {
     public Box(Game game, Position position) {
@@ -13,7 +14,20 @@ public class Box extends GameObject implements Movable {
     @Override
     public boolean canMove(Direction direction) {
         Position p = direction.nextPosition(this.getPosition());
-        return game.getWorld().isInside(p) && game.getWorld().get(p) == null && !(game.getWorld().getGO(p) instanceof Box);
+        if(!game.getWorld().isInside(p))
+            return false;
+
+        Decor d = game.getWorld().get(p);
+        if(d != null){
+            return d.canWalkOn();
+        }
+
+        GameObject g = game.getWorld().getGO(p);
+        if(g != null){
+            return g.canWalkOn();
+        }
+
+        return true;
     }
 
     @Override
@@ -22,5 +36,14 @@ public class Box extends GameObject implements Movable {
         game.getWorld().clearGO(getPosition());
         game.getWorld().setGO(nextPos, this);
         setPosition(nextPos);
+    }
+
+    @Override
+    public boolean canWalkOn() {
+        return false;
+    }
+
+    public boolean isMovable(){
+        return true;
     }
 }
