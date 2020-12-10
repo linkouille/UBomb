@@ -6,9 +6,11 @@ package fr.ubx.poo.engine;
 
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
+import fr.ubx.poo.model.decor.Decor;
 import fr.ubx.poo.model.go.Bomb;
+import fr.ubx.poo.model.go.effect.Effect;
+import fr.ubx.poo.model.go.effect.Explosion;
 import fr.ubx.poo.model.go.GameObject;
-import fr.ubx.poo.view.image.ImageFactory;
 import fr.ubx.poo.view.sprite.*;
 import fr.ubx.poo.game.Game;
 import fr.ubx.poo.model.go.character.Player;
@@ -16,7 +18,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -26,7 +27,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +46,7 @@ public final class GameEngine {
 
     //Not Final because gameObject could move;
     private List<Sprite> spritesGO = new ArrayList<>();
+    private List<Sprite> effect = new ArrayList<>(); //Explosion
 
     public GameEngine(final String windowTitle, Game game, final Stage stage) {
         this.windowTitle = windowTitle;
@@ -147,7 +148,20 @@ public final class GameEngine {
     private void update(long now) {
         player.update(now);
 
-        game.getWorld().forEachGameObject((pos,g) -> g.update(now));
+        game.getWorld().forEachGameObject((pos,g) -> {
+            g.update(now);
+            if(g.isExplosif()){
+                Bomb b = (Bomb) g;
+                if(b.isExploded()){
+                    //Bomb is dead so we explose
+                    PlaceExplosionObj(b,now);
+                }
+
+            }
+        });
+
+        game.getWorld().forEachEffect((pos,g) -> g.update(now));
+
 
         if (!player.isAlive()) {
             gameLoop.stop();
@@ -174,22 +188,89 @@ public final class GameEngine {
                 sprite.remove();
             }
         }
+        it = effect.iterator();
+        while (it.hasNext()){
+            Sprite sprite = it.next();
+            if(((SpriteGameObject)sprite).getGo().isDead()) {
+                game.getWorld().clearEffect(((SpriteGameObject)sprite).getGo().getPosition());
+                it.remove();
+                sprite.remove();
+            }
+        }
 
         sprites.forEach(Sprite::render);
         spritesGO.forEach(Sprite::render);
 
         // last rendering to have player in the foreground
         spritePlayer.render();
+
+        //We suppose Effect is over everything
+        effect.forEach(Sprite::render);
     }
 
     public void start() {
         gameLoop.start();
     }
 
-    public void createBombGameObject(Position pos, long now){
-        Bomb b = new Bomb(game,pos,now);
+    private void createBombGameObject(Position pos, long now){
+        Bomb b = new Bomb(game,pos, game.getPlayer().getRange(),now);
         game.getWorld().setGO(pos, b);
         spritesGO.add(SpriteFactory.createBomb(layer,b));
+
+    }
+
+    private void createExplosionGameObject(Position pos, long now){
+        if(game.getWorld().getEffect(pos) != null || !game.getWorld().isInside(pos)){
+            return;
+        }
+        Explosion expl = new Explosion(game, pos, now);
+        game.getWorld().setEffect(pos,expl);
+        effect.add(SpriteFactory.createExplosion(layer,expl));
+
+    }
+
+    private void PlaceExplosionObj(Bomb b, long now){
+        //Screen and then destroy
+
+        createExplosionGameObject(b.getPosition(),now);
+        IttDirectionExpl(Direction.E, b.getRange(), b.getPosition(),now);
+        IttDirectionExpl(Direction.S, b.getRange(), b.getPosition(),now);
+        IttDirectionExpl(Direction.W, b.getRange(), b.getPosition(),now);
+        IttDirectionExpl(Direction.N, b.getRange(), b.getPosition(),now);
+
+        b.destroy();
+
+    }
+    private void IttDirectionExpl(Direction dir, int itt, Position pos, long now){
+        Position p = pos;
+
+        GameObject g;
+        Decor decor;
+
+        for (int i = 0; i < itt; i++){
+            p = dir.nextPosition(p);
+
+            //If it's a decor we don't scree explosion
+            decor = game.getWorld().get(p);
+            if(decor != null)
+                break;
+
+            createExplosionGameObject(p,now);
+            g = game.getWorld().getGO(p);
+            if(g != null){
+                if(g.isDestroyable()){
+                    g.destroy();
+                    if(!g.isCollectable())
+                        break;
+                }else if(g.isExplosif()){
+                    Bomb b = (Bomb) g;
+                    b.setExploded(true);
+
+                }
+
+
+            }
+        }
 
     }
 

@@ -6,8 +6,10 @@ package fr.ubx.poo.game;
 
 import fr.ubx.poo.model.decor.Decor;
 import fr.ubx.poo.model.go.GameObject;
+import fr.ubx.poo.model.go.effect.Effect;
 
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -18,12 +20,14 @@ public class World {
 
     //Not Final cause Some Gameobject like Box could be moving
     private Map<Position, GameObject> gameObjects;
+    private Map<Position, Effect> effectObject;
 
     public World(WorldEntity[][] raw, Game game) {
         this.raw = raw;
         dimension = new Dimension(raw.length, raw[0].length);
         grid = WorldBuilder.buildDecor(raw, dimension);
         gameObjects = WorldBuilder.buildGameObject(raw,dimension,game);
+        effectObject = new Hashtable<>();
     }
 
     public Position findPlayer() throws PositionNotFoundException {
@@ -45,12 +49,20 @@ public class World {
         return gameObjects.get(position);
     }
 
+    public Effect getEffect(Position position) {
+        return effectObject.get(position);
+    }
+
     public void set(Position position, Decor decor) {
         grid.put(position, decor);
     }
 
     public void setGO(Position position, GameObject g) {
         gameObjects.put(position, g);
+    }
+
+    public void setEffect(Position position, Effect g) {
+        effectObject.put(position, g);
     }
 
     public void clear(Position position) {
@@ -61,12 +73,20 @@ public class World {
         gameObjects.remove(position);
     }
 
+    public void clearEffect(Position position) {
+        effectObject.remove(position);
+    }
+
     public void forEachDecor(BiConsumer<Position, Decor> fn) {
         grid.forEach(fn);
     }
 
     public void forEachGameObject(BiConsumer<Position, GameObject> fn) {
         gameObjects.forEach(fn);
+    }
+
+    public void forEachEffect(BiConsumer<Position, Effect> fn) {
+        effectObject.forEach(fn);
     }
 
     public Collection<Decor> values() {

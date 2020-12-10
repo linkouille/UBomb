@@ -46,4 +46,8 @@ public class Box extends GameObject implements Movable {
     public boolean isMovable(){
         return true;
     }
+
+    public boolean isDestroyable(){
+        return true;
+    }
 }

@@ -56,5 +56,14 @@ public abstract class GameObject extends Entity {
         //Can e collected (Key, bonus, Malus)
         return false;
     }
+    public boolean isDestroyable(){
+        //Can be destroyed by bomb
+        return false;
+    }
+
+    public boolean isExplosif(){
+        //Can Explose
+        return false;
+    }
 
 }

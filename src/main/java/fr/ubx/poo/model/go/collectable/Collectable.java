@@ -13,7 +13,10 @@ public abstract class Collectable extends GameObject {
     public abstract void pickUp(Player p);
 
     public boolean isCollectable(){
-        //Can e collected (Key, bonus, Malus)
+        return true;
+    }
+
+    public boolean isDestroyable(){
         return true;
     }
 }

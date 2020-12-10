@@ -10,6 +10,7 @@ import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Bomb;
 import fr.ubx.poo.model.go.Box;
+import fr.ubx.poo.model.go.effect.Explosion;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
 import fr.ubx.poo.model.go.character.Player;
@@ -55,4 +56,6 @@ public final class SpriteFactory {
     public static Sprite createBomb(Pane layer, Bomb bomb) {
         return new SpriteBomb(layer, bomb);
     }
+
+    public static Sprite createExplosion(Pane layer, Explosion expl){ return new SpriteExplosion(layer, expl); }
 }

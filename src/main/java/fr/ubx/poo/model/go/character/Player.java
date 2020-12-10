@@ -25,6 +25,10 @@ public class Player extends GameObject implements Movable {
 
     private int keys;
 
+    private int nbrBombMax;
+    private int nbrBombPlaced;
+    private int range;
+
     private boolean isNearDoor;
     private Door prevDoor;
 
@@ -35,6 +39,10 @@ public class Player extends GameObject implements Movable {
         this.direction = Direction.S;
         this.lives = game.getInitPlayerLives();
         this.placeBomb = false;
+        this.nbrBombMax = 3;
+        this.nbrBombPlaced = 0;
+        this.range = 1;
+
     }
 
     public int getLives() {
@@ -65,6 +73,26 @@ public class Player extends GameObject implements Movable {
         this.placeBomb = placeBomb;
     }
 
+    public int getNbrBombPlaced() {
+        return nbrBombPlaced;
+    }
+
+    public void modiffNbrBombPlaced(int nbrBombPlaced) {
+        this.nbrBombPlaced += nbrBombPlaced;
+    }
+
+    public int getNbrBombMax() {
+        return nbrBombMax;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
     public void requestMove(Direction direction) {
         if (direction != this.direction) {
             this.direction = direction;
@@ -82,8 +110,10 @@ public class Player extends GameObject implements Movable {
             ((Door) d).setState(true);
             keys --;
         }else{
-            if(game.getWorld().getGO(this.getPosition()) == null)
+            if(game.getWorld().getGO(this.getPosition()) == null && nbrBombPlaced < nbrBombMax) {
                 placeBomb = true;
+                nbrBombPlaced += 1;
+            }
 
         }
 
