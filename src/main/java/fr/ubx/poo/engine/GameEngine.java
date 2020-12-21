@@ -154,6 +154,7 @@ public final class GameEngine {
                 Bomb b = (Bomb) g;
                 if(b.isExploded()){
                     //Bomb is dead so we explose
+                    game.getPlayer().modiffNbrBombPlaced(-1);
                     PlaceExplosionObj(b,now);
                 }
 

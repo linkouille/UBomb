@@ -61,8 +61,6 @@ public class Bomb extends GameObject{
         }
 
         if(this.timer.isFinished()) {
-            game.getPlayer().modiffNbrBombPlaced(-1);
-
             exploded = true;
         }
     }
