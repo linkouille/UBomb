@@ -25,7 +25,7 @@ public class Character extends GameObject {
         this.lives += lives;
         damageTaken = true;
 
-        System.out.println(this + " has taken " + lives + " damage ! ");
+        // System.out.println(this + " has taken " + lives + " damage ! ");
 
         if(this.lives <= 0){
             this.lives = 0;

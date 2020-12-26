@@ -1,7 +1,6 @@
-package fr.ubx.poo.view.sprite;
+package fr.ubx.poo.view.sprite.spritegameobject;
 
 import fr.ubx.poo.model.go.GameObject;
-import fr.ubx.poo.model.go.collectable.BombCapacity;
 import fr.ubx.poo.model.go.collectable.BombRange;
 import fr.ubx.poo.view.image.ImageFactory;
 import fr.ubx.poo.view.image.ImageResource;

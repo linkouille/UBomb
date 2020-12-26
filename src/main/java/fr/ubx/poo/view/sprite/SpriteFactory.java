@@ -19,6 +19,7 @@ import fr.ubx.poo.model.go.character.Monster;
 import fr.ubx.poo.model.go.character.Player;
 import fr.ubx.poo.model.go.collectable.Key;
 import fr.ubx.poo.view.image.ImageFactory;
+import fr.ubx.poo.view.sprite.spritegameobject.*;
 import javafx.scene.layout.Pane;
 
 

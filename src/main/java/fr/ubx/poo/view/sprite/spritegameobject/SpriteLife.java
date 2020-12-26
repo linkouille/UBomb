@@ -1,12 +1,11 @@
-package fr.ubx.poo.view.sprite;
+package fr.ubx.poo.view.sprite.spritegameobject;
 
-import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.go.GameObject;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-public class SpriteKey extends SpriteGameObject {
-    public SpriteKey(Pane layer, Image image, GameObject go) {
+public class SpriteLife extends SpriteGameObject{
+    public SpriteLife(Pane layer, Image image, GameObject go) {
         super(layer, image, go);
     }
 

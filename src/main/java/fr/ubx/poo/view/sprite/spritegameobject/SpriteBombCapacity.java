@@ -1,4 +1,4 @@
-package fr.ubx.poo.view.sprite;
+package fr.ubx.poo.view.sprite.spritegameobject;
 
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.collectable.BombCapacity;

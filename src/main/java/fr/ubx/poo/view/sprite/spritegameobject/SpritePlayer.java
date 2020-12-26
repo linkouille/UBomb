@@ -2,9 +2,8 @@
  * Copyright (c) 2020. Laurent Réveillère
  */
 
-package fr.ubx.poo.view.sprite;
+package fr.ubx.poo.view.sprite.spritegameobject;
 
-import fr.ubx.poo.engine.Timer;
 import fr.ubx.poo.model.go.character.Player;
 import fr.ubx.poo.view.image.ImageFactory;
 import javafx.scene.effect.ColorAdjust;

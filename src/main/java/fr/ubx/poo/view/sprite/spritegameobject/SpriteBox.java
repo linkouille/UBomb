@@ -1,4 +1,4 @@
-package fr.ubx.poo.view.sprite;
+package fr.ubx.poo.view.sprite.spritegameobject;
 
 import fr.ubx.poo.model.go.GameObject;
 import javafx.scene.image.Image;
