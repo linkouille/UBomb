@@ -28,12 +28,13 @@ public class Timer {
     public Timer(float duration) {
         this.duration = duration;
         this.runnig = false;
-        this.finished = false;
+        this.finished = true;
     }
 
     public void StartTimer(long now){
-        initTime = now;
-        runnig = true;
+        this.initTime = now;
+        this.runnig = true;
+        this.finished = false;
 
     }
 
@@ -43,8 +44,8 @@ public class Timer {
             if( currentTime >= this.duration){
                 this.runnig = false;
                 this.finished = true;
+                return;
             }
-
         }else{
             currentTime = duration;
         }

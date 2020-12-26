@@ -19,5 +19,9 @@ public abstract class Collectable extends GameObject {
     public boolean isDestroyable(){
         return true;
     }
+    @Override
+    public boolean canWalkOn() {
+        return true;
+    }
 }
 

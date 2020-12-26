@@ -66,4 +66,8 @@ public abstract class GameObject extends Entity {
         return false;
     }
 
+    public boolean isCharacter(){
+        return false;
+    }
+
 }

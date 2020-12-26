@@ -36,6 +36,10 @@ public enum ImageResource {
     BOMB_3("bomb2.png"),
     BOMB_4("bomb1.png"),
     EXPLOSION("explosion.png"),
+    BOMB_RANGE_INC("bonus_bomb_range_inc.png"),
+    BOMB_RANGE_DEC("bonus_bomb_range_dec.png"),
+    BOMB_CAPACITY_INC("bonus_bomb_nb_inc.png"),
+    BOMB_CAPACITY_DEC("bonus_bomb_nb_dec.png")
     ;
 
     private final String FileName;

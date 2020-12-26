@@ -10,6 +10,9 @@ import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Bomb;
 import fr.ubx.poo.model.go.Box;
+import fr.ubx.poo.model.go.collectable.BombCapacity;
+import fr.ubx.poo.model.go.collectable.BombRange;
+import fr.ubx.poo.model.go.collectable.Life;
 import fr.ubx.poo.model.go.effect.Explosion;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
@@ -45,6 +48,12 @@ public final class SpriteFactory {
             return new SpriteMonster(layer,factory.get(MONSTER_LEFT), gameObject);
         if(gameObject instanceof Key)
             return new SpriteKey(layer, factory.get(KEY), gameObject);
+        if(gameObject instanceof Life)
+            return new SpriteLife(layer, factory.get(HEART), gameObject);
+        if(gameObject instanceof BombCapacity)
+            return new SpriteBombCapacity(layer,gameObject);
+        if(gameObject instanceof BombRange)
+            return new SpriteBombRange(layer, gameObject);
 
         throw new RuntimeException("Invalid Sprite");
     }

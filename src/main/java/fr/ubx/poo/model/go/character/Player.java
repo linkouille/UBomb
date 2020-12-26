@@ -4,6 +4,7 @@
 
 package fr.ubx.poo.model.go.character;
 
+import fr.ubx.poo.engine.Timer;
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.Movable;
@@ -14,25 +15,28 @@ import fr.ubx.poo.game.Game;
 import fr.ubx.poo.model.go.collectable.Collectable;
 import fr.ubx.poo.model.go.collectable.Key;
 
-public class Player extends GameObject implements Movable {
-
-    private boolean alive = true;
+public class Player extends Character implements Movable {
 
     Direction direction;
+
     private boolean moveRequested = false;
-    private int lives = 1;
+
     private boolean winner;
 
     private int keys;
 
     private int nbrBombMax;
+
     private int nbrBombPlaced;
+
     private int range;
 
     private boolean isNearDoor;
     private Door prevDoor;
 
     private boolean placeBomb;
+
+    private Timer invicibleTimer;
 
     public Player(Game game, Position position) {
         super(game, position);
@@ -42,11 +46,8 @@ public class Player extends GameObject implements Movable {
         this.nbrBombMax = 3;
         this.nbrBombPlaced = 0;
         this.range = 1;
+        this.invicibleTimer = new Timer(1);
 
-    }
-
-    public int getLives() {
-        return lives;
     }
 
     public Direction getDirection() {
@@ -85,12 +86,21 @@ public class Player extends GameObject implements Movable {
         return nbrBombMax;
     }
 
+    public void addNbrBombMax(int nbrBombMax) {
+        this.nbrBombMax += nbrBombMax;
+        if(this.nbrBombMax <= 0)
+            this.nbrBombMax = 1;
+
+    }
+
     public int getRange() {
         return range;
     }
 
-    public void setRange(int range) {
-        this.range = range;
+    public void addRange(int range) {
+        this.range += range;
+        if(this.range <= 0)
+            this.range = 1;
     }
 
     public void requestMove(Direction direction) {
@@ -165,14 +175,24 @@ public class Player extends GameObject implements Movable {
             }
         }
         moveRequested = false;
+
+        if(isDamageTaken()){
+            invicibleTimer.StartTimer(now);
+            setDamageTaken(false);
+        }
+
+        this.invicibleTimer.update(now);
+        setCanTakeDamage(invicibleTimer.isFinished() || !invicibleTimer.isRunnig());
+
+    }
+
+    @Override
+    public void Die() {
+        this.setAlive(false);
     }
 
     public boolean isWinner() {
         return winner;
-    }
-
-    public boolean isAlive() {
-        return alive;
     }
 
     public boolean isMovable(){

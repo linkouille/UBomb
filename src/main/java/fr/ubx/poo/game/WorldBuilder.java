@@ -4,7 +4,10 @@ import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Box;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.character.Monster;
+import fr.ubx.poo.model.go.collectable.BombCapacity;
+import fr.ubx.poo.model.go.collectable.BombRange;
 import fr.ubx.poo.model.go.collectable.Key;
+import fr.ubx.poo.model.go.collectable.Life;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -69,6 +72,16 @@ public class WorldBuilder {
                 return new Monster(game, position);
             case Key:
                 return new Key(game, position);
+            case Heart:
+                return new Life(game,position);
+            case BombRangeDec:
+                return new BombRange(game,position,-1);
+            case BombRangeInc:
+                return new BombRange(game,position,1);
+            case BombNumberDec:
+                return new BombCapacity(game, position, -1);
+            case BombNumberInc:
+                return  new BombCapacity(game, position, 1);
             default:
                 return null;
         }

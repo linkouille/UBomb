@@ -17,9 +17,4 @@ public class Key extends Collectable {
         p.addKeys(1);
         destroy();
     }
-
-    @Override
-    public boolean canWalkOn() {
-        return true;
-    }
 }

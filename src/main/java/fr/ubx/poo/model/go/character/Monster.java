@@ -6,7 +6,7 @@ import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.Movable;
 import fr.ubx.poo.model.go.GameObject;
 
-public class Monster extends GameObject implements Movable {
+public class Monster extends Character implements Movable {
 
     Direction direction;
 
@@ -17,6 +17,9 @@ public class Monster extends GameObject implements Movable {
     public Monster(Game game, Position position) {
         super(game, position);
         this.direction = Direction.W;
+        setCanTakeDamage(true);
+        setAlive(true);
+        setLives(1);
     }
 
     @Override
@@ -30,5 +33,12 @@ public class Monster extends GameObject implements Movable {
     }
     public boolean canWalkOn(){
         return true;
+    }
+
+    @Override
+    public void update(long now) {
+        if(!isAlive())
+            this.Die();
+
     }
 }

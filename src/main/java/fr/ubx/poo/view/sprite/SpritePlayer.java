@@ -4,6 +4,7 @@
 
 package fr.ubx.poo.view.sprite;
 
+import fr.ubx.poo.engine.Timer;
 import fr.ubx.poo.model.go.character.Player;
 import fr.ubx.poo.view.image.ImageFactory;
 import javafx.scene.effect.ColorAdjust;

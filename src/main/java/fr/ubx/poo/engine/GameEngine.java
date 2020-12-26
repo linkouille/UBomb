@@ -8,6 +8,7 @@ import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.Decor;
 import fr.ubx.poo.model.go.Bomb;
+import fr.ubx.poo.model.go.character.Character;
 import fr.ubx.poo.model.go.effect.Effect;
 import fr.ubx.poo.model.go.effect.Explosion;
 import fr.ubx.poo.model.go.GameObject;
@@ -251,25 +252,33 @@ public final class GameEngine {
         for (int i = 0; i < itt; i++){
             p = dir.nextPosition(p);
 
-            //If it's a decor we don't scree explosion
+            //If it's a decor we don't screen explosion
             decor = game.getWorld().get(p);
-            if(decor != null)
+            if(decor != null) {
                 break;
-
+            }
+            // If it's a decor then we alway display the explosion
             createExplosionGameObject(p,now);
-            g = game.getWorld().getGO(p);
-            if(g != null){
-                if(g.isDestroyable()){
-                    g.destroy();
-                    if(!g.isCollectable())
-                        break;
-                }else if(g.isExplosif()){
-                    Bomb b = (Bomb) g;
-                    b.setExploded(true);
+            if(p.equals(player.getPosition())) { // We found the player so he take 1 hp
+                player.addLives(-1);
+            } else { // Maybe it's a gameobject
+                g = game.getWorld().getGO(p);
+                if (g != null) {
+                    if (g.isDestroyable()) { // We found a destroyable gameobject
+                        g.destroy();
+                        if (!g.isCollectable()) // If the gameobject isn't a collectable we stop
+                            break;
+                    } else if (g.isExplosif()) { // We found another bomb
+                        Bomb b = (Bomb) g;
+                        b.setExploded(true);
+
+                    } else if (g.isCharacter()) { // We found a monster
+                        Character c = (Character) g;
+                        c.addLives(-1);
+                    }
+
 
                 }
-
-
             }
         }
 
