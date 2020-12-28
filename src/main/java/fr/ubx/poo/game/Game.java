@@ -13,26 +13,39 @@ import fr.ubx.poo.model.go.character.Player;
 
 public class Game {
 
-    private final World world;
+    private final World[] worlds;
     private final Player player;
     private final String worldPath;
     public int initPlayerLives;
 
     private String prefix;
 
+    private int currentLevel;
+    private int nbrOfLevel;
+
     public Game(String worldPath) {
         // world = new WorldStatic(this);
         this.worldPath = worldPath;
         loadConfig(worldPath);
-        world = LoadLevel(1);
+        worlds = LoadLevels();
+        currentLevel = 1;
         Position positionPlayer = null;
         try {
-            positionPlayer = world.findPlayer();
+            positionPlayer = worlds[currentLevel - 1].findPlayer();
             player = new Player(this, positionPlayer);
         } catch (PositionNotFoundException e) {
             System.err.println("Position not found : " + e.getLocalizedMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    private World[] LoadLevels(){
+        World[] out = new World[nbrOfLevel];
+
+        for (int i = 0; i < nbrOfLevel; i++){
+            out[i] = LoadLevel(i+1);
+        }
+        return out;
     }
 
     private World LoadLevel(int id){
@@ -92,17 +105,26 @@ public class Game {
 
             prefix = prop.getProperty("prefix", "level");
 
+            nbrOfLevel = Integer.parseInt(prop.getProperty("levels", "1"));
+
         } catch (IOException ex) {
             System.err.println("Error loading configuration");
         }
     }
 
     public World getWorld() {
-        return world;
+        return worlds[currentLevel-1];
     }
 
     public Player getPlayer() {
         return this.player;
     }
 
+    public int getLevel() {
+        return currentLevel;
+    }
+
+    public void ChangeLevel(int newLevel){
+        currentLevel = newLevel;
+    }
 }

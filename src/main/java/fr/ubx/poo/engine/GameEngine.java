@@ -87,6 +87,13 @@ public final class GameEngine {
 
     }
 
+    private void ChangeLevel(int i){
+        stage.close();
+        game.ChangeLevel(i);
+        initialize(stage,game);
+
+    }
+
     protected final void buildAndSetGameLoop() {
         gameLoop = new AnimationTimer() {
             public void handle(long now) {
