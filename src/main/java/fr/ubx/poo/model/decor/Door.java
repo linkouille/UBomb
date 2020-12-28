@@ -4,6 +4,8 @@ public class Door extends Decor {
 
     private boolean state;
 
+    private final int toLevel;
+
     public boolean isState() {
         return state;
     }
@@ -12,7 +14,12 @@ public class Door extends Decor {
         this.state = state;
     }
 
-    public Door(boolean state) {
+    public int getToLevel() {
+        return toLevel;
+    }
+
+    public Door(boolean state, int toLevel) {
+        this.toLevel = toLevel;
         this.state = state;
     }
 
@@ -24,5 +31,10 @@ public class Door extends Decor {
     @Override
     public boolean canWalkOn() {
         return state;
+    }
+
+
+    public boolean isDoor(){
+        return true;
     }
 }

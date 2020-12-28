@@ -38,6 +38,9 @@ public class Player extends Character implements Movable {
 
     private Timer invicibleTimer;
 
+    private boolean nexLevel;
+    private int toLevel;
+
     public Player(Game game, Position position) {
         super(game, position);
         this.direction = Direction.S;
@@ -103,6 +106,18 @@ public class Player extends Character implements Movable {
             this.range = 1;
     }
 
+    public boolean isNexLevel() {
+        return nexLevel;
+    }
+
+    public void setNexLevel(boolean nexLevel) {
+        this.nexLevel = nexLevel;
+    }
+
+    public int getToLevel() {
+        return toLevel;
+    }
+
     public void requestMove(Direction direction) {
         if (direction != this.direction) {
             this.direction = direction;
@@ -137,6 +152,16 @@ public class Player extends Character implements Movable {
 
         Decor d = game.getWorld().get(p);
         if(d != null){
+            if(d.isDoor()){
+                Door door = (Door) d;
+                if(door.isState()){
+                    this.toLevel = game.getLevel() + door.getToLevel();
+                    this.nexLevel = true;
+                    return true;
+                }
+            }else if(d.isPrincess()){
+                winner = true;
+            }
             return d.canWalkOn();
         }
 

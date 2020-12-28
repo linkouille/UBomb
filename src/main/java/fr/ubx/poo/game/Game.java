@@ -65,7 +65,7 @@ public class Game {
             }while(buf != null);
             input.close();
 
-            WorldEntity[][] raw = new WorldEntity[xSize][ySize];
+            WorldEntity[][] raw = new WorldEntity[ySize][xSize];
             int x = 0, y = 0;
 
             for (String s : stringfile){
@@ -73,7 +73,7 @@ public class Game {
                     WorldEntity e = WorldEntity.fromCode(s.charAt(x)).get();
                     if(e == null)
                         throw new WorldEntityNotFoundException(e + " is an Invalid entity");
-                    raw[x][y] = e;
+                    raw[y][x] = e;
                 }
                 y++;
             }

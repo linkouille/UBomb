@@ -7,6 +7,7 @@ package fr.ubx.poo.engine;
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.Decor;
+import fr.ubx.poo.model.decor.Door;
 import fr.ubx.poo.model.go.Bomb;
 import fr.ubx.poo.model.go.character.Character;
 import fr.ubx.poo.model.go.effect.Effect;
@@ -31,6 +32,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public final class GameEngine {
@@ -91,6 +93,27 @@ public final class GameEngine {
         stage.close();
         game.ChangeLevel(i);
         initialize(stage,game);
+
+        //We need to update player pos
+
+        Position[] playerPos = new Position[1]; // to get pos from lambda call
+        game.getWorld().forEachDecor((pos,d) -> {
+            if(d.isDoor()){
+                Door door = (Door) d;
+                if(door.isState()){
+                    if(game.getLevel() == 1){ // We are level 1 so we need a Next door
+                        if(door.getToLevel() > 0)
+                            playerPos[0] = pos;
+                    }else{
+                        if(door.getToLevel() < 0)
+                            playerPos[0] = pos;
+                    }
+                }
+            }
+        });
+        if(playerPos[0] == null)
+            throw new RuntimeException("Can't place player");
+        player.setPosition(playerPos[0]);
 
     }
 
@@ -171,10 +194,6 @@ public final class GameEngine {
             }
         });
 
-        //We need to update position from Monster and box that could have changed
-
-
-
         game.getWorld().forEachEffect((e) -> e.update(now));
 
 
@@ -190,6 +209,10 @@ public final class GameEngine {
         if(player.isPlaceBomb()){
             createBombGameObject(player.getPosition(), now);
             player.setPlaceBomb(false);
+        }
+        if(player.isNexLevel()){
+            ChangeLevel(player.getToLevel());
+            player.setNexLevel(false);
         }
     }
     private void render() {

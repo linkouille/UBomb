@@ -8,4 +8,8 @@ public class Princess extends Decor {
     public boolean canWalkOn(){
         return true;
     }
+
+    public boolean isPrincess(){
+        return true;
+    }
 }

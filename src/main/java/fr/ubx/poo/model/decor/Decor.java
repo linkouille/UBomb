@@ -11,4 +11,11 @@ import fr.ubx.poo.model.Entity;
  */
 public class Decor extends Entity {
 
+    public boolean isDoor(){
+        return false;
+    }
+
+    public boolean isPrincess(){
+        return false;
+    }
 }

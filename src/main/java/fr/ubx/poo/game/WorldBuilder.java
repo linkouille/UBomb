@@ -57,10 +57,11 @@ public class WorldBuilder {
             case Princess:
                 return new Princess();
             case DoorNextClosed:
-                return new Door(false);
+                return new Door(false,1);
             case DoorNextOpened:
+                return  new Door(true,1);
             case DoorPrevOpened:
-                return  new Door(true);
+                return  new Door(true,-1);
 
             default:
                 return null;
