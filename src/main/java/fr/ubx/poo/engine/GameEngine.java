@@ -9,6 +9,7 @@ import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.Decor;
 import fr.ubx.poo.model.go.Bomb;
 import fr.ubx.poo.model.go.character.Character;
+import fr.ubx.poo.model.go.effect.Effect;
 import fr.ubx.poo.model.go.effect.Explosion;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.view.sprite.*;
@@ -80,7 +81,7 @@ public final class GameEngine {
         // Create decor sprites
         game.getWorld().forEachDecor( (pos,d) -> sprites.add(SpriteFactory.createDecor(layer, pos, d)));
 
-        game.getWorld().forEachGameObject((pos,g) -> spritesGO.add(SpriteFactory.createGameObject(layer, pos,g)));
+        game.getWorld().forEachGameObject((g) -> spritesGO.add(SpriteFactory.createGameObject(layer, g.getPosition(),g)));
 
         spritePlayer = SpriteFactory.createPlayer(layer, player);
 
@@ -149,8 +150,9 @@ public final class GameEngine {
     private void update(long now) {
         player.update(now);
 
-        game.getWorld().forEachGameObject((pos,g) -> {
+        game.getWorld().forEachGameObject((g) -> {
             g.update(now);
+
             if(g.isExplosif()){
                 Bomb b = (Bomb) g;
                 if(b.isExploded()){
@@ -162,7 +164,11 @@ public final class GameEngine {
             }
         });
 
-        game.getWorld().forEachEffect((pos,g) -> g.update(now));
+        //We need to update position from Monster and box that could have changed
+
+
+
+        game.getWorld().forEachEffect((e) -> e.update(now));
 
 
         if (!player.isAlive()) {
@@ -185,16 +191,17 @@ public final class GameEngine {
         while (it.hasNext()){
             Sprite sprite = it.next();
             if(((SpriteGameObject)sprite).getGo().isDead()) {
-                game.getWorld().clearGO (((SpriteGameObject)sprite).getGo().getPosition());
+                game.getWorld().clearGO (((SpriteGameObject)sprite).getGo());
                 it.remove();
                 sprite.remove();
             }
         }
+
         it = effect.iterator();
         while (it.hasNext()){
             Sprite sprite = it.next();
             if(((SpriteGameObject)sprite).getGo().isDead()) {
-                game.getWorld().clearEffect(((SpriteGameObject)sprite).getGo().getPosition());
+                game.getWorld().clearEffect((Effect) ((SpriteGameObject)sprite).getGo());
                 it.remove();
                 sprite.remove();
             }
@@ -216,7 +223,7 @@ public final class GameEngine {
 
     private void createBombGameObject(Position pos, long now){
         Bomb b = new Bomb(game,pos, game.getPlayer().getRange(),now);
-        game.getWorld().setGO(pos, b);
+        game.getWorld().setGO(b);
         spritesGO.add(SpriteFactory.createBomb(layer,b));
 
     }
@@ -226,7 +233,7 @@ public final class GameEngine {
             return;
         }
         Explosion expl = new Explosion(game, pos, now);
-        game.getWorld().setEffect(pos,expl);
+        game.getWorld().setEffect(expl);
         effect.add(SpriteFactory.createExplosion(layer,expl));
 
     }
@@ -276,7 +283,6 @@ public final class GameEngine {
                         Character c = (Character) g;
                         c.addLives(-1);
                     }
-
 
                 }
             }

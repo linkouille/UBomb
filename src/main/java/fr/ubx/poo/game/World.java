@@ -8,10 +8,9 @@ import fr.ubx.poo.model.decor.Decor;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.effect.Effect;
 
-import java.util.Collection;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class World {
     private final Map<Position, Decor> grid;
@@ -19,15 +18,18 @@ public class World {
     public final Dimension dimension;
 
     //Not Final cause Some Gameobject like Box could be moving
-    private Map<Position, GameObject> gameObjects;
-    private Map<Position, Effect> effectObject;
+    // private Map<Position, GameObject> gameObjects;
+    // private Map<Position, Effect> effectObject;
+
+    private List<GameObject> gameObjects;
+    private List<Effect> effectObjects;
 
     public World(WorldEntity[][] raw, Game game) {
         this.raw = raw;
         dimension = new Dimension(raw.length, raw[0].length);
         grid = WorldBuilder.buildDecor(raw, dimension);
         gameObjects = WorldBuilder.buildGameObject(raw,dimension,game);
-        effectObject = new Hashtable<>();
+        effectObjects = new ArrayList<>();
     }
 
     public Position findPlayer() throws PositionNotFoundException {
@@ -46,47 +48,53 @@ public class World {
     }
 
     public GameObject getGO(Position position) {
-        return gameObjects.get(position);
+        for (GameObject go : gameObjects) {
+            if(go.getPosition().equals(position))
+                return go;
+
+        }
+        return null;
     }
 
     public Effect getEffect(Position position) {
-        return effectObject.get(position);
+
+        for (Effect e: effectObjects) {
+            if(e.getPosition().equals(position))
+                return e;
+        }
+        return null;
     }
 
     public void set(Position position, Decor decor) {
         grid.put(position, decor);
     }
 
-    public void setGO(Position position, GameObject g) {
-        gameObjects.put(position, g);
-    }
+    public void setGO(GameObject go){ gameObjects.add(go); }
 
-    public void setEffect(Position position, Effect g) {
-        effectObject.put(position, g);
-    }
+    public void setEffect(Effect effect){ effectObjects.add(effect); }
 
     public void clear(Position position) {
         grid.remove(position);
     }
 
-    public void clearGO(Position position) {
-        gameObjects.remove(position);
+    public void clearGO(GameObject go) {
+        gameObjects.remove(go);
     }
 
-    public void clearEffect(Position position) {
-        effectObject.remove(position);
+    public void clearEffect(Effect effect) {
+        effectObjects.remove(effect);
     }
 
     public void forEachDecor(BiConsumer<Position, Decor> fn) {
         grid.forEach(fn);
     }
 
-    public void forEachGameObject(BiConsumer<Position, GameObject> fn) {
+    public void forEachGameObject(Consumer<GameObject> fn) {
         gameObjects.forEach(fn);
     }
 
-    public void forEachEffect(BiConsumer<Position, Effect> fn) {
-        effectObject.forEach(fn);
+    public void forEachEffect(Consumer<Effect> fn) {
+        effectObjects.forEach(fn);
     }
 
     public Collection<Decor> values() {

@@ -26,8 +26,4 @@ public class Explosion extends Effect {
         }
     }
 
-    @Override
-    public boolean canWalkOn() {
-        return true;
-    }
 }

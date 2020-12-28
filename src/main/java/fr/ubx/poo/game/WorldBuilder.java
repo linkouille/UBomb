@@ -9,7 +9,9 @@ import fr.ubx.poo.model.go.collectable.BombRange;
 import fr.ubx.poo.model.go.collectable.Key;
 import fr.ubx.poo.model.go.collectable.Life;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 public class WorldBuilder {
@@ -33,17 +35,17 @@ public class WorldBuilder {
         return builder.grid;
     }
 
-    public static Map<Position, GameObject> buildGameObject(WorldEntity[][] raw, Dimension dimension, Game game) {
-        WorldBuilder builder = new WorldBuilder();
+    public static List<GameObject> buildGameObject(WorldEntity[][] raw, Dimension dimension, Game game) {
+        List<GameObject> out = new ArrayList<>();
         for (int x = 0; x < dimension.width; x++) {
             for (int y = 0; y < dimension.height; y++) {
                 Position pos = new Position(x, y);
                 GameObject g = processGameObject(raw[y][x], game, new Position(x,y));
                 if (g != null)
-                    builder.gameObjects.put(pos, g);
+                    out.add(g);
             }
         }
-        return builder.gameObjects;
+        return out;
     }
 
     private static Decor processDecor(WorldEntity entity) {

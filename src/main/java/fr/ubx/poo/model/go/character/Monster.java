@@ -15,6 +15,8 @@ public class Monster extends Character implements Movable {
 
     private Timer movetimer;
 
+    private boolean moveRequested;
+
     public Direction getDirection() {
         return direction;
     }
@@ -40,7 +42,12 @@ public class Monster extends Character implements Movable {
 
         Decor d = game.getWorld().get(p);
         if(d != null){
-            return d.canWalkOn();
+            return false;
+        }
+
+        if(game.getPlayer().getPosition().equals(p)){
+            game.getPlayer().addLives(-1);
+            return true;
         }
 
         // In the next position we have a GameObject
@@ -54,10 +61,16 @@ public class Monster extends Character implements Movable {
 
     @Override
     public void doMove(Direction direction) {
+        setDirection(direction);
         Position nextPos = direction.nextPosition(getPosition());
         setPosition(nextPos);
 
-        setDirection(direction);
+    }
+    public void requestMove(Direction direction) {
+        if (direction != this.direction) {
+            this.direction = direction;
+        }
+        moveRequested = true;
     }
 
     public boolean canWalkOn(){
@@ -69,14 +82,19 @@ public class Monster extends Character implements Movable {
         if(!isAlive())
             this.Die();
 
+        if (moveRequested) {
+            doMove(direction);
+        }
+        moveRequested = false;
+
         movetimer.update(now);
 
         if(movetimer.isFinished() || !movetimer.isRunnig()){
-            Direction newdir;
+            Direction newDirection;
             do{
-                newdir = Direction.random();
-            }while(!canMove(newdir));
-            doMove(newdir);
+                newDirection = Direction.random();
+            }while(!canMove(newDirection));
+            requestMove(newDirection);
             movetimer.StartTimer(now);
         }
     }

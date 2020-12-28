@@ -33,8 +33,8 @@ public class Box extends GameObject implements Movable {
     @Override
     public void doMove(Direction direction) {
         Position nextPos = direction.nextPosition(getPosition());
-        game.getWorld().clearGO(getPosition());
-        game.getWorld().setGO(nextPos, this);
+        // game.getWorld().clearGO(getPosition());
+        // game.getWorld().setGO(nextPos, this);
         setPosition(nextPos);
     }
 
