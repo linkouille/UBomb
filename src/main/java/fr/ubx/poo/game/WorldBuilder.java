@@ -69,7 +69,7 @@ public class WorldBuilder {
             case Box:
                 return new Box(game,position);
             case Monster:
-                return new Monster(game, position);
+                return new Monster(game, position, 1);
             case Key:
                 return new Key(game, position);
             case Heart:
