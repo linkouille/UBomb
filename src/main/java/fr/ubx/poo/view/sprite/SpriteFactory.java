@@ -55,6 +55,10 @@ public final class SpriteFactory {
             return new SpriteBombCapacity(layer,gameObject);
         if(gameObject instanceof BombRange)
             return new SpriteBombRange(layer, gameObject);
+        if(gameObject instanceof Bomb) // In case we come back to a level with a bomb fusing
+            return createBomb(layer, (Bomb) gameObject);
+        if(gameObject instanceof Explosion)// In case we come back to a level with a bomb exploding
+            return createExplosion(layer, (Explosion) gameObject);
 
         throw new RuntimeException("Invalid Sprite");
     }

@@ -115,6 +115,9 @@ public class Game {
     public World getWorld() {
         return worlds[currentLevel-1];
     }
+    public World getWorld(int level) {
+        return worlds[level];
+    }
 
     public Player getPlayer() {
         return this.player;
@@ -126,5 +129,9 @@ public class Game {
 
     public void ChangeLevel(int newLevel){
         currentLevel = newLevel;
+    }
+
+    public int getNbrOfLevel() {
+        return nbrOfLevel;
     }
 }

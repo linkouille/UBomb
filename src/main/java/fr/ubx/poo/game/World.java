@@ -93,6 +93,10 @@ public class World {
         gameObjects.forEach(fn);
     }
 
+    public Iterator<GameObject> itterateGameObjects(){
+        return gameObjects.iterator();
+    }
+
     public void forEachEffect(Consumer<Effect> fn) {
         effectObjects.forEach(fn);
     }

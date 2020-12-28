@@ -80,10 +80,20 @@ public final class GameEngine {
         input = new Input(scene);
         root.getChildren().add(layer);
         statusBar = new StatusBar(root, sceneWidth, sceneHeight, game);
-        // Create decor sprites
-        game.getWorld().forEachDecor( (pos,d) -> sprites.add(SpriteFactory.createDecor(layer, pos, d)));
 
-        game.getWorld().forEachGameObject((g) -> spritesGO.add(SpriteFactory.createGameObject(layer, g.getPosition(),g)));
+        // Create decor sprites
+        game.getWorld().forEachDecor((pos, d) -> sprites.add(SpriteFactory.createDecor(layer, pos, d)));
+
+
+        Iterator<GameObject> itGO = game.getWorld().itterateGameObjects();
+        while(itGO.hasNext()){
+            GameObject g = itGO.next();
+            if(!g.isDead()) {
+                spritesGO.add(SpriteFactory.createGameObject(layer, g.getPosition(), g));
+            }else{
+                itGO.remove();
+            }
+        }
 
         spritePlayer = SpriteFactory.createPlayer(layer, player);
 
@@ -91,6 +101,7 @@ public final class GameEngine {
 
     private void ChangeLevel(int i){
         stage.close();
+
         game.ChangeLevel(i);
         initialize(stage,game);
 
@@ -186,7 +197,7 @@ public final class GameEngine {
             if(g.isExplosif()){
                 Bomb b = (Bomb) g;
                 if(b.isExploded()){
-                    //Bomb is dead so we explose
+                    //Bomb is dead so we explode
                     game.getPlayer().modiffNbrBombPlaced(-1);
                     PlaceExplosionObj(b,now);
                 }
