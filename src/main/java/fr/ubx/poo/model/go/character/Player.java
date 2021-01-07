@@ -65,10 +65,6 @@ public class Player extends Character implements Movable {
         this.keys += keys;
     }
 
-    public boolean isNearDoor() {
-        return isNearDoor;
-    }
-
     public boolean isPlaceBomb() {
         return placeBomb;
     }
@@ -155,7 +151,7 @@ public class Player extends Character implements Movable {
             if(d.isDoor()){
                 Door door = (Door) d;
                 if(door.isState()){
-                    this.toLevel = game.getLevel() + door.getToLevel();
+                    this.toLevel = door.getToLevel();
                     this.nexLevel = true;
                     return true;
                 }

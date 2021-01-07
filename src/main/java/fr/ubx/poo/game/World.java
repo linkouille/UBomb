@@ -5,6 +5,7 @@
 package fr.ubx.poo.game;
 
 import fr.ubx.poo.model.decor.Decor;
+import fr.ubx.poo.model.decor.Door;
 import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.effect.Effect;
 
@@ -24,6 +25,10 @@ public class World {
     private List<GameObject> gameObjects;
     private List<Effect> effectObjects;
 
+    /** Constructor of the World
+     * @param raw 2D Array of WorldEntity
+     * @param game current game
+     */
     public World(WorldEntity[][] raw, Game game) {
         this.raw = raw;
         dimension = new Dimension(raw.length, raw[0].length);
@@ -32,6 +37,10 @@ public class World {
         effectObjects = new ArrayList<>();
     }
 
+    /** Find player in the World on creation
+     * @return WorldEntity.Player position in the raw of the World
+     * @throws PositionNotFoundException
+     */
     public Position findPlayer() throws PositionNotFoundException {
         for (int x = 0; x < dimension.width; x++) {
             for (int y = 0; y < dimension.height; y++) {
@@ -101,15 +110,13 @@ public class World {
         effectObjects.forEach(fn);
     }
 
-    public Collection<Decor> values() {
-        return grid.values();
-    }
-
     public boolean isInside(Position position) {
         return position.inside(this.dimension); // to update
     }
 
+
     public boolean isEmpty(Position position) {
         return grid.get(position) == null;
     }
+
 }

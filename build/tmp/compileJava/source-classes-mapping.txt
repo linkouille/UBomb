@@ -8,12 +8,12 @@ fr/ubx/poo/game/Dimension.java
  fr.ubx.poo.game.Dimension
 fr/ubx/poo/game/PositionNotFoundException.java
  fr.ubx.poo.game.PositionNotFoundException
-fr/ubx/poo/model/decor/Princess.java
- fr.ubx.poo.model.decor.Princess
+fr/ubx/poo/game/WorldEntity.java
+ fr.ubx.poo.game.WorldEntity
 fr/ubx/poo/engine/Timer.java
  fr.ubx.poo.engine.Timer
-fr/ubx/poo/view/sprite/SpriteDoor.java
- fr.ubx.poo.view.sprite.SpriteDoor
+fr/ubx/poo/game/Position.java
+ fr.ubx.poo.game.Position
 fr/ubx/poo/view/sprite/SpriteDecor.java
  fr.ubx.poo.view.sprite.SpriteDecor
 fr/ubx/poo/view/sprite/Sprite.java
@@ -35,17 +35,18 @@ fr/ubx/poo/model/decor/Decor.java
 fr/ubx/poo/view/image/ImageFactory.java
  fr.ubx.poo.view.image.ImageFactory
  fr.ubx.poo.view.image.ImageFactory$Holder
-fr/ubx/poo/model/decor/Door.java
- fr.ubx.poo.model.decor.Door
-fr/ubx/poo/game/Position.java
- fr.ubx.poo.game.Position
-fr/ubx/poo/game/WorldEntity.java
- fr.ubx.poo.game.WorldEntity
 fr/ubx/poo/view/image/ImageResource.java
  fr.ubx.poo.view.image.ImageResource
-fr/ubx/poo/game/WorldBuilder.java
- fr.ubx.poo.game.WorldBuilder
- fr.ubx.poo.game.WorldBuilder$1
+fr/ubx/poo/model/decor/Princess.java
+ fr.ubx.poo.model.decor.Princess
+fr/ubx/poo/model/decor/Door.java
+ fr.ubx.poo.model.decor.Door
+fr/ubx/poo/view/sprite/SpriteDoor.java
+ fr.ubx.poo.view.sprite.SpriteDoor
+fr/ubx/poo/model/go/collectable/Life.java
+ fr.ubx.poo.model.go.collectable.Life
+fr/ubx/poo/view/sprite/spritegameobject/SpriteBombCapacity.java
+ fr.ubx.poo.view.sprite.spritegameobject.SpriteBombCapacity
 fr/ubx/poo/model/go/character/Character.java
  fr.ubx.poo.model.go.character.Character
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBombRange.java
@@ -66,8 +67,6 @@ fr/ubx/poo/model/go/GameObject.java
  fr.ubx.poo.model.go.GameObject
 fr/ubx/poo/model/go/Bomb.java
  fr.ubx.poo.model.go.Bomb
-fr/ubx/poo/model/go/collectable/Life.java
- fr.ubx.poo.model.go.collectable.Life
 fr/ubx/poo/view/sprite/spritegameobject/SpriteKey.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteKey
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBomb.java
@@ -76,35 +75,36 @@ fr/ubx/poo/game/Game.java
  fr.ubx.poo.game.Game
 fr/ubx/poo/model/go/effect/Explosion.java
  fr.ubx.poo.model.go.effect.Explosion
-fr/ubx/poo/view/sprite/spritegameobject/SpriteMonster.java
- fr.ubx.poo.view.sprite.spritegameobject.SpriteMonster
+fr/ubx/poo/model/go/collectable/Key.java
+ fr.ubx.poo.model.go.collectable.Key
 fr/ubx/poo/model/go/collectable/Collectable.java
  fr.ubx.poo.model.go.collectable.Collectable
 fr/ubx/poo/game/World.java
  fr.ubx.poo.game.World
 fr/ubx/poo/model/go/collectable/BombRange.java
  fr.ubx.poo.model.go.collectable.BombRange
-fr/ubx/poo/model/go/character/Monster.java
- fr.ubx.poo.model.go.character.Monster
+fr/ubx/poo/engine/StatusBar.java
+ fr.ubx.poo.engine.StatusBar
 fr/ubx/poo/game/WorldStatic.java
  fr.ubx.poo.game.WorldStatic
 fr/ubx/poo/model/go/collectable/BombCapacity.java
  fr.ubx.poo.model.go.collectable.BombCapacity
 fr/ubx/poo/view/sprite/spritegameobject/SpritePlayer.java
  fr.ubx.poo.view.sprite.spritegameobject.SpritePlayer
-fr/ubx/poo/view/sprite/SpriteFactory.java
- fr.ubx.poo.view.sprite.SpriteFactory
-fr/ubx/poo/view/sprite/spritegameobject/SpriteBombCapacity.java
- fr.ubx.poo.view.sprite.spritegameobject.SpriteBombCapacity
-fr/ubx/poo/engine/StatusBar.java
- fr.ubx.poo.engine.StatusBar
-fr/ubx/poo/model/go/collectable/Key.java
- fr.ubx.poo.model.go.collectable.Key
 fr/ubx/poo/view/sprite/spritegameobject/SpriteExplosion.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteExplosion
-fr/ubx/poo/Main.java
- fr.ubx.poo.Main
 fr/ubx/poo/engine/GameEngine.java
  fr.ubx.poo.engine.GameEngine
  fr.ubx.poo.engine.GameEngine$1
  fr.ubx.poo.engine.GameEngine$2
+fr/ubx/poo/Main.java
+ fr.ubx.poo.Main
+fr/ubx/poo/game/WorldBuilder.java
+ fr.ubx.poo.game.WorldBuilder
+ fr.ubx.poo.game.WorldBuilder$1
+fr/ubx/poo/view/sprite/SpriteFactory.java
+ fr.ubx.poo.view.sprite.SpriteFactory
+fr/ubx/poo/view/sprite/spritegameobject/SpriteMonster.java
+ fr.ubx.poo.view.sprite.spritegameobject.SpriteMonster
+fr/ubx/poo/model/go/character/Monster.java
+ fr.ubx.poo.model.go.character.Monster

@@ -5,6 +5,9 @@ import fr.ubx.poo.game.Game;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.go.GameObject;
 
+/**
+ * a Character is a GameObject that can take damage
+ */
 public class Character extends GameObject {
 
     private boolean alive = true;

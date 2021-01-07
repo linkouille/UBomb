@@ -22,6 +22,11 @@ public class WorldBuilder {
     private WorldBuilder() {
     }
 
+    /** Create all Decor of the World
+     * @param raw 2D WorldEntity value of the world
+     * @param dimension dimention of the world
+     * @return Map that link Decor to his position
+     */
     public static Map<Position, Decor> buildDecor(WorldEntity[][] raw, Dimension dimension) {
         WorldBuilder builder = new WorldBuilder();
         for (int x = 0; x < dimension.width; x++) {
@@ -35,6 +40,12 @@ public class WorldBuilder {
         return builder.grid;
     }
 
+    /** Create all Decor of the World
+     * @param raw 2D WorldEntity value of the world
+     * @param dimension dimention of the world
+     * @param game current game
+     * @return List of GameObjects of the world
+     */
     public static List<GameObject> buildGameObject(WorldEntity[][] raw, Dimension dimension, Game game) {
         List<GameObject> out = new ArrayList<>();
         for (int x = 0; x < dimension.width; x++) {
@@ -48,6 +59,10 @@ public class WorldBuilder {
         return out;
     }
 
+    /** Transform a WorldEntity to a Decor
+     * @param entity the world Entity
+     * @return Decor object
+     */
     private static Decor processDecor(WorldEntity entity) {
         switch (entity) {
             case Stone:
@@ -67,6 +82,13 @@ public class WorldBuilder {
                 return null;
         }
     }
+
+    /** Transform a WorldEntity to a GameObject
+     * @param entity the world Entity
+     * @param game current game
+     * @param position position of the WorldEntity in the world
+     * @return GameObjects object
+     */
     private static GameObject processGameObject(WorldEntity entity, Game game, Position position) {
         switch (entity) {
             case Box:

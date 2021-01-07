@@ -18,6 +18,10 @@ public class Door extends Decor {
         return toLevel;
     }
 
+    /** a Door Decor
+     * @param state can be false (closed) or true (opened)
+     * @param toLevel offset for the level changement -1: previous level 1: next level
+     */
     public Door(boolean state, int toLevel) {
         this.toLevel = toLevel;
         this.state = state;
@@ -25,7 +29,7 @@ public class Door extends Decor {
 
     @Override
     public String toString() {
-        return "Princess";
+        return "Door: toLevel " + toLevel + " state: " + state;
     }
 
     @Override

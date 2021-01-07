@@ -23,6 +23,9 @@ public class Game {
     private int currentLevel;
     private int nbrOfLevel;
 
+    /** Constructor of Game
+     * @param worldPath the path to worlds files and config
+     */
     public Game(String worldPath) {
         // world = new WorldStatic(this);
         this.worldPath = worldPath;
@@ -39,6 +42,9 @@ public class Game {
         }
     }
 
+    /** Load all levels from worlds files
+     * @return List of all Worlds
+     */
     private World[] LoadLevels(){
         World[] out = new World[nbrOfLevel];
 
@@ -48,6 +54,10 @@ public class Game {
         return out;
     }
 
+    /** Load the level n° id from corresponding world file
+     * @param id the identification of the level (level1 id is 1)
+     * @return World when it's loaded
+     */
     private World LoadLevel(int id){
         String pathtoLevel = this.worldPath + "/" + this.prefix + id + ".txt";
 
@@ -96,6 +106,9 @@ public class Game {
         return initPlayerLives;
     }
 
+    /** Load the config for the game
+     * @param path path to the config file
+     */
     private void loadConfig(String path) {
         try (InputStream input = new FileInputStream(new File(path, "config.properties"))) {
             Properties prop = new Properties();
@@ -115,9 +128,6 @@ public class Game {
     public World getWorld() {
         return worlds[currentLevel-1];
     }
-    public World getWorld(int level) {
-        return worlds[level];
-    }
 
     public Player getPlayer() {
         return this.player;
@@ -129,9 +139,5 @@ public class Game {
 
     public void ChangeLevel(int newLevel){
         currentLevel = newLevel;
-    }
-
-    public int getNbrOfLevel() {
-        return nbrOfLevel;
     }
 }
