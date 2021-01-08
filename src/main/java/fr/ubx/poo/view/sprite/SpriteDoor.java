@@ -2,11 +2,16 @@ package fr.ubx.poo.view.sprite;
 
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.decor.Door;
+import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.view.image.ImageFactory;
 import fr.ubx.poo.view.image.ImageResource;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+/**
+ * {@link Sprite} of a {@link Door}
+ * Can be open or not {@link Door#isState()}
+ */
 public class SpriteDoor extends SpriteDecor {
 
     private boolean state;

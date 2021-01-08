@@ -28,17 +28,17 @@ public class Door extends Decor {
     }
 
     @Override
-    public String toString() {
-        return "Door: toLevel " + toLevel + " state: " + state;
-    }
-
-    @Override
     public boolean canWalkOn() {
         return state;
     }
 
-
+    @Override
     public boolean isDoor(){
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Door: toLevel " + toLevel + " state: " + state;
     }
 }

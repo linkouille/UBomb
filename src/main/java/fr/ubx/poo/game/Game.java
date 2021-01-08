@@ -25,6 +25,8 @@ public class Game {
 
     /** Constructor of Game
      * @param worldPath the path to worlds files and config
+     * @see #loadConfig(String)
+     * @see World
      */
     public Game(String worldPath) {
         // world = new WorldStatic(this);
@@ -44,6 +46,7 @@ public class Game {
 
     /** Load all levels from worlds files
      * @return List of all Worlds
+     * @see #LoadLevel(int)
      */
     private World[] LoadLevels(){
         World[] out = new World[nbrOfLevel];
@@ -56,7 +59,7 @@ public class Game {
 
     /** Load the level n° id from corresponding world file
      * @param id the identification of the level (level1 id is 1)
-     * @return World when it's loaded
+     * @return World when it's loaded null if any error is raised
      */
     private World LoadLevel(int id){
         String pathtoLevel = this.worldPath + "/" + this.prefix + id + ".txt";

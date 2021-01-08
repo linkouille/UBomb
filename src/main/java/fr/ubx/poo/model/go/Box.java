@@ -3,6 +3,7 @@ package fr.ubx.poo.model.go;
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Game;
 import fr.ubx.poo.game.Position;
+import fr.ubx.poo.model.Entity;
 import fr.ubx.poo.model.Movable;
 import fr.ubx.poo.model.decor.Decor;
 
@@ -11,6 +12,11 @@ public class Box extends GameObject implements Movable {
         super(game, position);
     }
 
+    /**
+     * Test if box can move in this direction with {@link Entity#canWalkOn()}
+     * @param direction
+     * @return
+     */
     @Override
     public boolean canMove(Direction direction) {
         Position p = direction.nextPosition(this.getPosition());
@@ -33,8 +39,6 @@ public class Box extends GameObject implements Movable {
     @Override
     public void doMove(Direction direction) {
         Position nextPos = direction.nextPosition(getPosition());
-        // game.getWorld().clearGO(getPosition());
-        // game.getWorld().setGO(nextPos, this);
         setPosition(nextPos);
     }
 

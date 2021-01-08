@@ -4,6 +4,7 @@ import fr.ubx.poo.engine.Timer;
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Game;
 import fr.ubx.poo.game.Position;
+import fr.ubx.poo.model.Entity;
 import fr.ubx.poo.model.Movable;
 import fr.ubx.poo.model.decor.Decor;
 import fr.ubx.poo.model.go.GameObject;
@@ -17,8 +18,6 @@ public class Monster extends Character implements Movable {
     private Direction direction;
 
     private Timer moveTimer;
-
-    private boolean moveRequested;
 
     public Direction getDirection() {
         return direction;
@@ -43,11 +42,11 @@ public class Monster extends Character implements Movable {
     }
 
     /** Check if the Monster can walk on the position in the direction
-     * @param direction
+     * @param direction direction we want to move in
      * @return true if Monster can walk and false otherwise
      * Monster can't walk on Decor
      * if Monster walk on Player then player take damage
-     * Monster can walk on other gameObjects based on there canWalkOn() method return
+     * Monster can walk on other gameObjects based on there {@link Entity#canWalkOn()} method return
      */
     @Override
     public boolean canMove(Direction direction) {
@@ -84,16 +83,8 @@ public class Monster extends Character implements Movable {
         setPosition(nextPos);
 
     }
-    public void requestMove(Direction direction) {
-        if(direction == null)
-            return;
 
-        if (direction != this.direction) {
-            this.direction = direction;
-        }
-        moveRequested = true;
-    }
-
+    @Override
     public boolean canWalkOn(){
         return true;
     }
@@ -108,22 +99,10 @@ public class Monster extends Character implements Movable {
         if(!isAlive())
             this.Die();
 
-        if (moveRequested) {
-            doMove(direction);
-        }
-        moveRequested = false;
-
         moveTimer.update(now);
 
         if(moveTimer.isFinished() || !moveTimer.isRunnig()){
-            /*
-            Direction newDirection;
-            do{
-                newDirection = Direction.random();
-            }while(!canMove(newDirection));
-
-             */
-            requestMove(randomPostion());
+            doMove(randomPostion());
             moveTimer.StartTimer(now);
         }
     }

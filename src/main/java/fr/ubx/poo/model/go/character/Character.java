@@ -22,20 +22,6 @@ public class Character extends GameObject {
         return lives;
     }
 
-    public void addLives(int lives) {
-        if(!canTakeDamage)
-            return;
-        this.lives += lives;
-        damageTaken = true;
-
-        // System.out.println(this + " has taken " + lives + " damage ! ");
-
-        if(this.lives <= 0){
-            this.lives = 0;
-            this.alive = false;
-        }
-    }
-
     public void setLives(int lives) {
         this.lives = lives;
     }
@@ -68,6 +54,28 @@ public class Character extends GameObject {
         super(game, position);
     }
 
+    /**
+     * Add live(s) to a Character
+     * trigger damageTaken bool
+     * lives can't be < 0 if it does the Character is Dead (set alive to false
+     * @param lives the amount of modification for lives can be negative (take damage) or positive (heal)
+     */
+    public void addLives(int lives) {
+        if(!canTakeDamage)
+            return;
+        this.lives += lives;
+        if(lives < 0)
+            damageTaken = true;
+
+        if(this.lives <= 0){
+            this.lives = 0;
+            this.alive = false;
+        }
+    }
+
+    /**
+     * Kill Character (call destroy method from GameObject
+     */
     public void Die(){
         this.destroy();
     }
@@ -75,5 +83,13 @@ public class Character extends GameObject {
     @Override
     public boolean isCharacter() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "lives=" + lives +
+                "position=" + getPosition() +
+                '}';
     }
 }

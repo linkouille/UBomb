@@ -39,7 +39,6 @@ public final class SpriteFactory {
         throw new RuntimeException("Invalid Sprite");
     }
 
-    //TODO
     public static Sprite createGameObject(Pane layer, Position position, GameObject gameObject){
         ImageFactory factory = ImageFactory.getInstance();
 

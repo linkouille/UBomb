@@ -6,6 +6,9 @@ import fr.ubx.poo.view.sprite.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+/**
+ * {@link Sprite} of a {@link GameObject}
+ */
 public abstract class SpriteGameObject extends Sprite {
     protected final GameObject go;
 

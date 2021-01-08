@@ -7,6 +7,7 @@ package fr.ubx.poo.model.go.character;
 import fr.ubx.poo.engine.Timer;
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.game.Position;
+import fr.ubx.poo.model.Entity;
 import fr.ubx.poo.model.Movable;
 import fr.ubx.poo.model.decor.*;
 import fr.ubx.poo.model.go.Box;
@@ -32,6 +33,7 @@ public class Player extends Character implements Movable {
     private int range;
 
     private boolean isNearDoor;
+
     private Door prevDoor;
 
     private boolean placeBomb;
@@ -39,19 +41,8 @@ public class Player extends Character implements Movable {
     private Timer invicibleTimer;
 
     private boolean nexLevel;
+
     private int toLevel;
-
-    public Player(Game game, Position position) {
-        super(game, position);
-        this.direction = Direction.S;
-        this.lives = game.getInitPlayerLives();
-        this.placeBomb = false;
-        this.nbrBombMax = 3;
-        this.nbrBombPlaced = 0;
-        this.range = 1;
-        this.invicibleTimer = new Timer(1);
-
-    }
 
     public Direction getDirection() {
         return direction;
@@ -85,21 +76,8 @@ public class Player extends Character implements Movable {
         return nbrBombMax;
     }
 
-    public void addNbrBombMax(int nbrBombMax) {
-        this.nbrBombMax += nbrBombMax;
-        if(this.nbrBombMax <= 0)
-            this.nbrBombMax = 1;
-
-    }
-
     public int getRange() {
         return range;
-    }
-
-    public void addRange(int range) {
-        this.range += range;
-        if(this.range <= 0)
-            this.range = 1;
     }
 
     public boolean isNexLevel() {
@@ -114,6 +92,52 @@ public class Player extends Character implements Movable {
         return toLevel;
     }
 
+    /**
+     * Contructor for player
+     * @param game current game
+     * @param position initial position for the player
+     * Define
+     * nbrBombMax maximal number of Bombs player can place
+     * range of the Bombs
+     */
+    public Player(Game game, Position position) {
+        super(game, position);
+        this.direction = Direction.S;
+        this.lives = game.getInitPlayerLives();
+        this.placeBomb = false;
+        this.nbrBombMax = 3;
+        this.nbrBombPlaced = 0;
+        this.range = 1;
+        this.invicibleTimer = new Timer(1);
+
+    }
+
+    /**
+     * Range can't be less than 1
+     * @param range amount added (can be positive or negative)
+     */
+    public void addRange(int range) {
+        this.range += range;
+        if(this.range <= 0)
+            this.range = 1;
+    }
+
+    /**
+     * BombMax can't be less than 1
+     * @param nbrBombMax amount added (can be positive or negative)
+     */
+    public void addNbrBombMax(int nbrBombMax) {
+        this.nbrBombMax += nbrBombMax;
+        if(this.nbrBombMax <= 0)
+            this.nbrBombMax = 1;
+
+    }
+
+    /**
+     * Request Move which will be applied in the next update call
+     * @param direction
+     * @see #update(long now)
+     */
     public void requestMove(Direction direction) {
         if (direction != this.direction) {
             this.direction = direction;
@@ -121,13 +145,21 @@ public class Player extends Character implements Movable {
         moveRequested = true;
     }
 
+    /**
+     * Called when user press SPACE
+     * if there is a door in front of the player and player have a key it open the door
+     * else we place a bomb
+     * @param now current itme in nanosecond
+     * @see fr.ubx.poo.model.go.Bomb
+     * @see Door
+     */
     public void Act(long now){
         //Called if space is pressed
         Position p = this.direction.nextPosition(this.getPosition());
 
         Decor d = game.getWorld().get(p);
 
-        if(keys > 0 && d instanceof Door && !((Door) d).isState()){
+        if(keys > 0 && d.isDoor() && !((Door) d).isState()){
             ((Door) d).setState(true);
             keys --;
         }else{
@@ -140,6 +172,20 @@ public class Player extends Character implements Movable {
 
     }
 
+    /**
+     * Test if player can move in direction
+     * if there are a {@link Decor}
+     * -> if it's a {@link Door} opened then we go to the next/prev level
+     * -> if it's the {@link Princess} then we won
+     * else we look at the {@link Entity#canWalkOn()}
+     * if it's a {@link GameObject}
+     * -> if it's {@link Movable} then move it
+     * -> if it's {@link Collectable} then collect it
+     * -> if it's {@link Character} then player take 1 damage
+     *
+     * @param direction
+     * @return
+     */
     @Override
     public boolean canMove(Direction direction) {
         Position p = direction.nextPosition(this.getPosition());
@@ -187,11 +233,17 @@ public class Player extends Character implements Movable {
         return true;
     }
 
+    @Override
     public void doMove(Direction direction) {
         Position nextPos = direction.nextPosition(getPosition());
         setPosition(nextPos);
     }
 
+    /**
+     * Update player move and invicible timer
+     * @param now current time in nanosecond
+     */
+    @Override
     public void update(long now) {
         if (moveRequested) {
             if (canMove(direction)) {
@@ -210,6 +262,9 @@ public class Player extends Character implements Movable {
 
     }
 
+    /**
+     * When player reach 0 HP you lose (switch Alive to false)
+     */
     @Override
     public void Die() {
         this.setAlive(false);

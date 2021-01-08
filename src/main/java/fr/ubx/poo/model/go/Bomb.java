@@ -6,6 +6,10 @@ import fr.ubx.poo.game.Position;
 import fr.ubx.poo.game.Direction;
 import fr.ubx.poo.model.decor.Decor;
 
+/**
+ * {@link GameObject} that explode after 4 seconds
+ * Not present on the world so is placed by {@link fr.ubx.poo.engine.GameEngine}
+ */
 public class Bomb extends GameObject{
 
     private int state;
@@ -40,6 +44,13 @@ public class Bomb extends GameObject{
         this.exploded = exploded;
     }
 
+    /**
+     * Constructor for the Bomb
+     * @param game current game
+     * @param position position of the Bomb
+     * @param range range from {@link fr.ubx.poo.model.go.character.Player} can't be less than 1
+     * @param now current time in nanoseconds
+     */
     public Bomb(Game game, Position position, int range, long now) {
         super(game, position);
 
@@ -52,6 +63,10 @@ public class Bomb extends GameObject{
 
     }
 
+    /**
+     * Update Bomb timer and check if it's finished
+     * @param now current time in nanoseconds
+     */
     public void update(long now){
 
         this.timer.update(now);
@@ -69,7 +84,6 @@ public class Bomb extends GameObject{
     }
 
     public boolean isExplosif(){
-        //Can Explose
         return true;
     }
 }

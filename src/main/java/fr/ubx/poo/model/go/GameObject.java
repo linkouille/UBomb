@@ -10,6 +10,7 @@ import fr.ubx.poo.model.Entity;
 
 /***
  * A GameObject can acces the game and knows its position in the grid.
+ * GameObject can be destroyed ({@link #destroy()})
  */
 public abstract class GameObject extends Entity {
     protected final Game game;

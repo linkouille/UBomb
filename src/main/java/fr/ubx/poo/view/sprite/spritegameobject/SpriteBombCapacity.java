@@ -4,9 +4,13 @@ import fr.ubx.poo.model.go.GameObject;
 import fr.ubx.poo.model.go.collectable.BombCapacity;
 import fr.ubx.poo.view.image.ImageFactory;
 import fr.ubx.poo.view.image.ImageResource;
+import fr.ubx.poo.view.sprite.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+/**
+ * {@link Sprite} of a {@link BombCapacity}
+ */
 public class SpriteBombCapacity extends SpriteGameObject{
 
     public SpriteBombCapacity(Pane layer, GameObject go) {

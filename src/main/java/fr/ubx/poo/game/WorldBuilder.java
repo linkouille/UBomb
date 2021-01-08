@@ -26,6 +26,7 @@ public class WorldBuilder {
      * @param raw 2D WorldEntity value of the world
      * @param dimension dimention of the world
      * @return Map that link Decor to his position
+     * @see #processDecor(WorldEntity)
      */
     public static Map<Position, Decor> buildDecor(WorldEntity[][] raw, Dimension dimension) {
         WorldBuilder builder = new WorldBuilder();
@@ -45,6 +46,7 @@ public class WorldBuilder {
      * @param dimension dimention of the world
      * @param game current game
      * @return List of GameObjects of the world
+     * @see #processGameObject(WorldEntity, Game, Position)
      */
     public static List<GameObject> buildGameObject(WorldEntity[][] raw, Dimension dimension, Game game) {
         List<GameObject> out = new ArrayList<>();

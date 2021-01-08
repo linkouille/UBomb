@@ -4,6 +4,10 @@ import fr.ubx.poo.game.Game;
 import fr.ubx.poo.game.Position;
 import fr.ubx.poo.model.go.character.Player;
 
+/**
+ * {@link Collectable} that add or remove Maximum Bomb from {@link Player}
+ * @see Player#addNbrBombMax(int)
+ */
 public class BombCapacity extends Collectable{
 
     private final int value;
@@ -19,10 +23,7 @@ public class BombCapacity extends Collectable{
 
     @Override
     public void pickUp(Player p) {
-        System.out.println("Pickup " + this);
         p.addNbrBombMax(this.value);
         this.destroy();
-
-
     }
 }

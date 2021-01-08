@@ -56,6 +56,9 @@ public final class GameEngine {
      * @param windowTitle The title of the window
      * @param game The game the engine is running containing the world, the player and other elements
      * @param stage JavaFX stage
+     * @see Game
+     * @see #initialize(Stage, Game)
+     * @see #buildAndSetGameLoop()
      */
     public GameEngine(final String windowTitle, Game game, final Stage stage) {
         this.windowTitle = windowTitle;
@@ -162,6 +165,9 @@ public final class GameEngine {
 
     /**
      * Build and Set gameLoop with Input, Update and Render
+     * @see #processInput(long)
+     * @see #update(long)
+     * @see #render()
      */
     protected final void buildAndSetGameLoop() {
         gameLoop = new AnimationTimer() {
@@ -181,6 +187,7 @@ public final class GameEngine {
 
     /** Process input from the keyboard Z, Q, S, D, ESC and SPACE
      * @param now current time in nanosecond
+     * @see Input
      */
     private void processInput(long now) {
         if (input.isExit()) {
@@ -234,6 +241,9 @@ public final class GameEngine {
     /** Update Action of the gameobjects
      * Check if player win, lose, place a bomb or goes to the next level
      * @param now current time in nanoseconds
+     * @see GameObject
+     * @see Effect
+     * @see Player
      */
     private void update(long now) {
         player.update(now);
@@ -276,6 +286,7 @@ public final class GameEngine {
 
     /**
      * render all the sprites in Arrays sprite, spritesGO, spritePlayer and effect (order of render)
+     * @see Sprite
      */
     private void render() {
         Iterator<Sprite> it = spritesGO.iterator();
@@ -318,6 +329,7 @@ public final class GameEngine {
     /** Create a new Bomb at pos and add the sprite in spriteGO to render him
      * @param pos the position of the Bomb
      * @param now current time in nanoseconds
+     * @see Bomb
      */
     private void createBombGameObject(Position pos, long now){
         Bomb b = new Bomb(game,pos, game.getPlayer().getRange(),now);
@@ -329,6 +341,7 @@ public final class GameEngine {
     /** Create a new Explosion effect at pos and add the sprite in effect to render him
      * @param pos The position of the Explosion
      * @param now current time in nanoseconds
+     * @see Explosion
      */
     private void createExplosionGameObject(Position pos, long now){
         if(game.getWorld().getEffect(pos) != null || !game.getWorld().isInside(pos)){
@@ -344,6 +357,8 @@ public final class GameEngine {
      * It places Explosion in the position of b and then call IttDirectionExpl in the 4 directions.
      * @param b Bomb object that exploded
      * @param now current time in nanoseconds
+     * @see #IttDirectionExpl(Direction, int, Position, long)
+     * @see #createExplosionGameObject(Position, long)
      */
     private void PlaceExplosionObj(Bomb b, long now){
         //Screen and then destroy
