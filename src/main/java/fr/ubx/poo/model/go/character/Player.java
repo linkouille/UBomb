@@ -146,15 +146,22 @@ public class Player extends Character implements Movable {
     }
 
     /**
-     * Called when user press SPACE
-     * if there is a door in front of the player and player have a key it open the door
-     * else we place a bomb
+     * Called when user press SPACE and place a bomb
      * @param now current itme in nanosecond
      * @see fr.ubx.poo.model.go.Bomb
-     * @see Door
      */
-    public void Act(long now){
+    public void Placebomb(long now){
         //Called if space is pressed
+        if(game.getWorld().getGO(this.getPosition()) == null && nbrBombPlaced < nbrBombMax) {
+            placeBomb = true;
+            nbrBombPlaced += 1;
+        }
+    }
+
+    /**
+     * Called when user press ENTER and open {@link Door} in front of the player if the player has a {@link Key}
+     */
+    public void UseKey(){
         Position p = this.direction.nextPosition(this.getPosition());
 
         Decor d = game.getWorld().get(p);
@@ -162,15 +169,11 @@ public class Player extends Character implements Movable {
         if(keys > 0 && d.isDoor() && !((Door) d).isState()){
             ((Door) d).setState(true);
             keys --;
-        }else{
-            if(game.getWorld().getGO(this.getPosition()) == null && nbrBombPlaced < nbrBombMax) {
-                placeBomb = true;
-                nbrBombPlaced += 1;
-            }
-
         }
 
     }
+
+
 
     /**
      * Test if player can move in direction
@@ -182,7 +185,6 @@ public class Player extends Character implements Movable {
      * -> if it's {@link Movable} then move it
      * -> if it's {@link Collectable} then collect it
      * -> if it's {@link Character} then player take 1 damage
-     *
      * @param direction
      * @return
      */

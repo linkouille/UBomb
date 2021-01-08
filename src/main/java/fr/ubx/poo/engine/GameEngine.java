@@ -208,7 +208,10 @@ public final class GameEngine {
             player.requestMove(Direction.N);
         }
         if(input.isBomb()){
-            player.Act(now);
+            player.Placebomb(now);
+        }
+        if(input.isKey()){
+            player.UseKey();
         }
         input.clear();
     }
