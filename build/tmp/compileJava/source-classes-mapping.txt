@@ -37,6 +37,14 @@ fr/ubx/poo/view/image/ImageFactory.java
  fr.ubx.poo.view.image.ImageFactory$Holder
 fr/ubx/poo/view/image/ImageResource.java
  fr.ubx.poo.view.image.ImageResource
+fr/ubx/poo/Main.java
+ fr.ubx.poo.Main
+fr/ubx/poo/view/sprite/SpriteDoor.java
+ fr.ubx.poo.view.sprite.SpriteDoor
+fr/ubx/poo/view/sprite/SpriteDecor.java
+ fr.ubx.poo.view.sprite.SpriteDecor
+fr/ubx/poo/engine/Timer.java
+ fr.ubx.poo.engine.Timer
 fr/ubx/poo/game/WorldBuilder.java
  fr.ubx.poo.game.WorldBuilder
  fr.ubx.poo.game.WorldBuilder$1
@@ -44,8 +52,6 @@ fr/ubx/poo/model/go/character/Character.java
  fr.ubx.poo.model.go.character.Character
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBombRange.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteBombRange
-fr/ubx/poo/engine/Timer.java
- fr.ubx.poo.engine.Timer
 fr/ubx/poo/model/go/character/Player.java
  fr.ubx.poo.model.go.character.Player
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBox.java
@@ -56,18 +62,12 @@ fr/ubx/poo/view/sprite/spritegameobject/SpriteLife.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteLife
 fr/ubx/poo/view/sprite/spritegameobject/SpriteGameObject.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteGameObject
-fr/ubx/poo/view/sprite/SpriteDoor.java
- fr.ubx.poo.view.sprite.SpriteDoor
-fr/ubx/poo/view/sprite/SpriteDecor.java
- fr.ubx.poo.view.sprite.SpriteDecor
 fr/ubx/poo/model/go/Box.java
  fr.ubx.poo.model.go.Box
 fr/ubx/poo/model/go/GameObject.java
  fr.ubx.poo.model.go.GameObject
 fr/ubx/poo/model/go/Bomb.java
  fr.ubx.poo.model.go.Bomb
-fr/ubx/poo/Main.java
- fr.ubx.poo.Main
 fr/ubx/poo/view/sprite/spritegameobject/SpriteKey.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteKey
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBomb.java

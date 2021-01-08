@@ -220,11 +220,7 @@ public class Player extends Character implements Movable {
             }else if(g.isCollectable()){
                 Collectable c = (Collectable) g;
                 c.pickUp(this);
-            }else if (g.isCharacter()){ // The only other character is a monster
-                System.out.println("You walk on a monster");
-                addLives(-1);
-            }
-            else{
+            }else{
                 return g.canWalkOn();
             }
 

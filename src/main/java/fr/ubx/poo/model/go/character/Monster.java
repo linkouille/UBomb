@@ -44,8 +44,8 @@ public class Monster extends Character implements Movable {
     /** Check if the Monster can walk on the position in the direction
      * @param direction direction we want to move in
      * @return true if Monster can walk and false otherwise
-     * Monster can't walk on Decor
-     * if Monster walk on Player then player take damage
+     * Monster can't walk on {@link Decor}
+     * if Monster walk on {@link Player}
      * Monster can walk on other gameObjects based on there {@link Entity#canWalkOn()} method return
      */
     @Override
@@ -60,7 +60,7 @@ public class Monster extends Character implements Movable {
         }
 
         if(game.getPlayer().getPosition().equals(p)){
-            game.getPlayer().addLives(-1);
+            //game.getPlayer().addLives(-1);
             return true;
         }
 
@@ -100,6 +100,9 @@ public class Monster extends Character implements Movable {
             this.Die();
 
         moveTimer.update(now);
+
+        if(getPosition().equals(game.getPlayer().getPosition()))
+            game.getPlayer().addLives(-1);
 
         if(moveTimer.isFinished() || !moveTimer.isRunnig()){
             doMove(randomPostion());
