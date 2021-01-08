@@ -13,7 +13,7 @@ public class Box extends GameObject implements Movable {
     }
 
     /**
-     * Test if box can move in this direction with {@link Entity#canWalkOn()}
+     * Test if box can move in this direction with {@link Entity#canWalkOn()} ({@link GameObject} is always false)
      * @param direction
      * @return
      */
@@ -30,7 +30,7 @@ public class Box extends GameObject implements Movable {
 
         GameObject g = game.getWorld().getGO(p);
         if(g != null){
-            return g.canWalkOn();
+            return false;
         }
 
         return true;
