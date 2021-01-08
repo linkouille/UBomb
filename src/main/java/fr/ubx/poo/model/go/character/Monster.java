@@ -19,6 +19,8 @@ public class Monster extends Character implements Movable {
 
     private Timer moveTimer;
 
+    private float speed;
+
     public Direction getDirection() {
         return direction;
     }
@@ -38,7 +40,8 @@ public class Monster extends Character implements Movable {
         setCanTakeDamage(true);
         setAlive(true);
         setLives(1);
-        moveTimer = new Timer(1);
+        moveTimer = new Timer(999);
+        this.speed = speed;
     }
 
     /** Check if the Monster can walk on the position in the direction
@@ -78,6 +81,9 @@ public class Monster extends Character implements Movable {
 
     @Override
     public void doMove(Direction direction) {
+        if(direction == null)
+            return;
+
         setDirection(direction);
         Position nextPos = direction.nextPosition(getPosition());
         setPosition(nextPos);
@@ -99,20 +105,28 @@ public class Monster extends Character implements Movable {
         if(!isAlive())
             this.Die();
 
+        moveTimer.setDuration(speed / game.getLevel());
         moveTimer.update(now);
 
         if(getPosition().equals(game.getPlayer().getPosition()))
             game.getPlayer().addLives(-1);
 
         if(moveTimer.isFinished() || !moveTimer.isRunnig()){
-            doMove(randomPostion());
+            Direction newDir = null;
+            if(game.getLevel() == game.getMaxLevel()){
+                newDir = toPlayer();
+
+            }else{
+                newDir = randomPostion();
+            }
+            doMove(newDir);
             moveTimer.StartTimer(now);
         }
     }
 
     /**
     * Return a Random Direction in the Direction Monster canWalkOn (call canMove)
-    * return null if the monster can't move in any direction
+     * @return direction or null if the monster can't move in any direction
     */
     private Direction randomPostion(){
         Random rand = new Random();
@@ -122,6 +136,32 @@ public class Monster extends Character implements Movable {
 
         return out.length == 0 ? null : out[rand.nextInt(out.length)];
 
+    }
+
+    /**
+     * PathFinding Algorithm that find the direction from possible one that bring Monster the closest to the {@link Player}
+     * @return direction or null if there is no possible direction
+     */
+    private Direction toPlayer(){
+        //We want to minimise this distance
+        double minDist = getPosition().distance(game.getPlayer().getPosition());
+
+        List<Direction> dir = new ArrayList<>(Arrays.asList(Direction.N,Direction.S,Direction.E,Direction.W));
+        Direction[] possibleDir =  dir.stream().filter(d->canMove(d)).toArray(Direction[]::new);
+
+        Direction out = null;
+        double dist;
+
+        for (Direction d : possibleDir) {
+            dist = d.nextPosition(getPosition()).distance(game.getPlayer().getPosition());
+            if(dist < minDist){
+                out = d;
+                minDist = dist;
+            }
+
+        }
+
+        return out;
     }
 
 }

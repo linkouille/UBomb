@@ -29,6 +29,10 @@ public class Position {
                 y == position.y;
     }
 
+    public double distance(Position pos){
+        return Math.sqrt((this.x - pos.x) * ((this.x - pos.x)) + (this.y - pos.y) * (this.y - pos.y));
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(x, y);

@@ -132,6 +132,8 @@ public class Game {
         return worlds[currentLevel-1];
     }
 
+    public int getMaxLevel(){ return worlds.length; }
+
     public Player getPlayer() {
         return this.player;
     }

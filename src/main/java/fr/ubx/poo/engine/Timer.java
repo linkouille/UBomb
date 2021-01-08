@@ -33,6 +33,10 @@ public class Timer {
         return currentTime;
     }
 
+    public void setDuration(float duration) {
+        this.duration = duration;
+    }
+
     public Timer(float duration) {
         this.duration = duration;
         this.runnig = false;
