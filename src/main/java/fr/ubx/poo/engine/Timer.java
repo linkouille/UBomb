@@ -52,7 +52,7 @@ public class Timer {
 
     /**
      * Update timer time and check if the timer has ended
-     * @param now current time in microseconds
+     * @param now current time in ms
      */
     public void update(long now) {
         if(this.runnig){
