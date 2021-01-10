@@ -12,12 +12,13 @@ fr/ubx/poo/model/decor/Princess.java
  fr.ubx.poo.model.decor.Princess
 fr/ubx/poo/game/WorldEntity.java
  fr.ubx.poo.game.WorldEntity
-fr/ubx/poo/engine/Timer.java
- fr.ubx.poo.engine.Timer
+fr/ubx/poo/view/image/ImageFactory.java
+ fr.ubx.poo.view.image.ImageFactory
+ fr.ubx.poo.view.image.ImageFactory$Holder
 fr/ubx/poo/engine/Input.java
  fr.ubx.poo.engine.Input
-fr/ubx/poo/Main.java
- fr.ubx.poo.Main
+fr/ubx/poo/model/Movable.java
+ fr.ubx.poo.model.Movable
 fr/ubx/poo/game/WorldEntityNotFoundException.java
  fr.ubx.poo.game.WorldEntityNotFoundException
 fr/ubx/poo/model/decor/Tree.java
@@ -40,11 +41,6 @@ fr/ubx/poo/view/sprite/SpriteDoor.java
  fr.ubx.poo.view.sprite.SpriteDoor
 fr/ubx/poo/view/sprite/SpriteDecor.java
  fr.ubx.poo.view.sprite.SpriteDecor
-fr/ubx/poo/model/Movable.java
- fr.ubx.poo.model.Movable
-fr/ubx/poo/view/image/ImageFactory.java
- fr.ubx.poo.view.image.ImageFactory
- fr.ubx.poo.view.image.ImageFactory$Holder
 fr/ubx/poo/game/WorldBuilder.java
  fr.ubx.poo.game.WorldBuilder
  fr.ubx.poo.game.WorldBuilder$1
@@ -52,6 +48,8 @@ fr/ubx/poo/model/go/character/Character.java
  fr.ubx.poo.model.go.character.Character
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBombRange.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteBombRange
+fr/ubx/poo/engine/Timer.java
+ fr.ubx.poo.engine.Timer
 fr/ubx/poo/model/go/character/Player.java
  fr.ubx.poo.model.go.character.Player
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBox.java
@@ -68,6 +66,8 @@ fr/ubx/poo/model/go/GameObject.java
  fr.ubx.poo.model.go.GameObject
 fr/ubx/poo/model/go/Bomb.java
  fr.ubx.poo.model.go.Bomb
+fr/ubx/poo/Main.java
+ fr.ubx.poo.Main
 fr/ubx/poo/view/sprite/spritegameobject/SpriteKey.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteKey
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBomb.java

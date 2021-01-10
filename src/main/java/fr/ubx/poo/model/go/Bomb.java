@@ -80,7 +80,7 @@ public class Bomb extends GameObject{
         }
     }
     public boolean canWalkOn(){
-        return true;
+        return false;
     }
 
     public boolean isExplosif(){
