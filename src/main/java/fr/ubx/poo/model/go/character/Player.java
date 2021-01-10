@@ -147,7 +147,7 @@ public class Player extends Character implements Movable {
 
     /**
      * Called when user press SPACE and place a bomb
-     * @param now current itme in ms
+     * @param now current itme in nanoseconds
      * @see fr.ubx.poo.model.go.Bomb
      */
     public void Placebomb(long now){

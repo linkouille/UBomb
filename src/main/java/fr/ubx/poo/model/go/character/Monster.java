@@ -98,7 +98,7 @@ public class Monster extends Character implements Movable {
     /** Update Monster movement and timer
      * When the moveTimer is finshed then we try a random direction if we can't walk on it we try another one
      * Then we start again the timer
-     * @param now current time in ms
+     * @param now current time in nanoseconds
      */
     @Override
     public void update(long now) {

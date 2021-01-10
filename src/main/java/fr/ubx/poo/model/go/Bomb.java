@@ -65,7 +65,7 @@ public class Bomb extends GameObject{
 
     /**
      * Update Bomb timer and check if it's finished
-     * @param now current time in ms
+     * @param now current time in nanoseconds
      */
     public void update(long now){
 

@@ -243,7 +243,7 @@ public final class GameEngine {
 
     /** Update Action of the gameobjects
      * Check if player win, lose, place a bomb or goes to the next level
-     * @param now current time in ms
+     * @param now current time in nanoseconds
      * @see GameObject
      * @see Effect
      * @see Player
