@@ -147,7 +147,7 @@ public class Player extends Character implements Movable {
 
     /**
      * Called when user press SPACE and place a bomb
-     * @param now current itme in nanosecond
+     * @param now current itme in microseconds
      * @see fr.ubx.poo.model.go.Bomb
      */
     public void Placebomb(long now){
@@ -166,7 +166,7 @@ public class Player extends Character implements Movable {
 
         Decor d = game.getWorld().get(p);
 
-        if(keys > 0 && d.isDoor() && !((Door) d).isState()){
+        if(d != null && keys > 0 && d.isDoor() && !((Door) d).isState()){
             ((Door) d).setState(true);
             keys --;
         }
@@ -239,7 +239,7 @@ public class Player extends Character implements Movable {
 
     /**
      * Update player move and invicible timer
-     * @param now current time in nanosecond
+     * @param now current time in microseconds
      */
     @Override
     public void update(long now) {

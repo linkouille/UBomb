@@ -24,10 +24,27 @@ fr/ubx/poo/model/decor/Tree.java
  fr.ubx.poo.model.decor.Tree
 fr/ubx/poo/model/decor/Door.java
  fr.ubx.poo.model.decor.Door
-fr/ubx/poo/engine/StatusBar.java
- fr.ubx.poo.engine.StatusBar
+fr/ubx/poo/game/Position.java
+ fr.ubx.poo.game.Position
 fr/ubx/poo/model/decor/Decor.java
  fr.ubx.poo.model.decor.Decor
+fr/ubx/poo/view/sprite/Sprite.java
+ fr.ubx.poo.view.sprite.Sprite
+fr/ubx/poo/game/Direction.java
+ fr.ubx.poo.game.Direction
+ fr.ubx.poo.game.Direction$1
+ fr.ubx.poo.game.Direction$2
+ fr.ubx.poo.game.Direction$3
+ fr.ubx.poo.game.Direction$4
+fr/ubx/poo/view/sprite/SpriteDoor.java
+ fr.ubx.poo.view.sprite.SpriteDoor
+fr/ubx/poo/view/sprite/SpriteDecor.java
+ fr.ubx.poo.view.sprite.SpriteDecor
+fr/ubx/poo/model/Movable.java
+ fr.ubx.poo.model.Movable
+fr/ubx/poo/view/image/ImageFactory.java
+ fr.ubx.poo.view.image.ImageFactory
+ fr.ubx.poo.view.image.ImageFactory$Holder
 fr/ubx/poo/game/WorldBuilder.java
  fr.ubx.poo.game.WorldBuilder
  fr.ubx.poo.game.WorldBuilder$1
@@ -45,14 +62,8 @@ fr/ubx/poo/view/sprite/spritegameobject/SpriteLife.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteLife
 fr/ubx/poo/view/sprite/spritegameobject/SpriteGameObject.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteGameObject
-fr/ubx/poo/view/sprite/SpriteDoor.java
- fr.ubx.poo.view.sprite.SpriteDoor
-fr/ubx/poo/view/sprite/SpriteDecor.java
- fr.ubx.poo.view.sprite.SpriteDecor
 fr/ubx/poo/model/go/Box.java
  fr.ubx.poo.model.go.Box
-fr/ubx/poo/model/Movable.java
- fr.ubx.poo.model.Movable
 fr/ubx/poo/model/go/GameObject.java
  fr.ubx.poo.model.go.GameObject
 fr/ubx/poo/model/go/Bomb.java
@@ -63,20 +74,12 @@ fr/ubx/poo/view/sprite/spritegameobject/SpriteBomb.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteBomb
 fr/ubx/poo/game/Game.java
  fr.ubx.poo.game.Game
-fr/ubx/poo/view/sprite/Sprite.java
- fr.ubx.poo.view.sprite.Sprite
 fr/ubx/poo/model/go/effect/Explosion.java
  fr.ubx.poo.model.go.effect.Explosion
 fr/ubx/poo/view/sprite/spritegameobject/SpriteMonster.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteMonster
 fr/ubx/poo/model/go/collectable/Collectable.java
  fr.ubx.poo.model.go.collectable.Collectable
-fr/ubx/poo/game/Direction.java
- fr.ubx.poo.game.Direction
- fr.ubx.poo.game.Direction$1
- fr.ubx.poo.game.Direction$2
- fr.ubx.poo.game.Direction$3
- fr.ubx.poo.game.Direction$4
 fr/ubx/poo/game/World.java
  fr.ubx.poo.game.World
 fr/ubx/poo/model/go/collectable/BombRange.java
@@ -85,11 +88,6 @@ fr/ubx/poo/model/go/character/Monster.java
  fr.ubx.poo.model.go.character.Monster
 fr/ubx/poo/game/WorldStatic.java
  fr.ubx.poo.game.WorldStatic
-fr/ubx/poo/view/image/ImageFactory.java
- fr.ubx.poo.view.image.ImageFactory
- fr.ubx.poo.view.image.ImageFactory$Holder
-fr/ubx/poo/game/Position.java
- fr.ubx.poo.game.Position
 fr/ubx/poo/model/go/collectable/BombCapacity.java
  fr.ubx.poo.model.go.collectable.BombCapacity
 fr/ubx/poo/view/sprite/spritegameobject/SpritePlayer.java
@@ -98,6 +96,8 @@ fr/ubx/poo/view/sprite/SpriteFactory.java
  fr.ubx.poo.view.sprite.SpriteFactory
 fr/ubx/poo/view/sprite/spritegameobject/SpriteBombCapacity.java
  fr.ubx.poo.view.sprite.spritegameobject.SpriteBombCapacity
+fr/ubx/poo/engine/StatusBar.java
+ fr.ubx.poo.engine.StatusBar
 fr/ubx/poo/model/go/collectable/Key.java
  fr.ubx.poo.model.go.collectable.Key
 fr/ubx/poo/engine/GameEngine.java

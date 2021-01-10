@@ -186,7 +186,7 @@ public final class GameEngine {
     }
 
     /** Process input from the keyboard Z, Q, S, D, ESC and SPACE
-     * @param now current time in nanosecond
+     * @param now current time in microseconds
      * @see Input
      */
     private void processInput(long now) {
@@ -243,7 +243,7 @@ public final class GameEngine {
 
     /** Update Action of the gameobjects
      * Check if player win, lose, place a bomb or goes to the next level
-     * @param now current time in nanoseconds
+     * @param now current time in microseconds
      * @see GameObject
      * @see Effect
      * @see Player
@@ -331,7 +331,7 @@ public final class GameEngine {
 
     /** Create a new Bomb at pos and add the sprite in spriteGO to render him
      * @param pos the position of the Bomb
-     * @param now current time in nanoseconds
+     * @param now current time in microseconds
      * @see Bomb
      */
     private void createBombGameObject(Position pos, long now){
@@ -343,7 +343,7 @@ public final class GameEngine {
 
     /** Create a new Explosion effect at pos and add the sprite in effect to render him
      * @param pos The position of the Explosion
-     * @param now current time in nanoseconds
+     * @param now current time in microseconds
      * @see Explosion
      */
     private void createExplosionGameObject(Position pos, long now){
@@ -359,7 +359,7 @@ public final class GameEngine {
     /** Place Explosions b when the Bomb explode
      * It places Explosion in the position of b and then call IttDirectionExpl in the 4 directions.
      * @param b Bomb object that exploded
-     * @param now current time in nanoseconds
+     * @param now current time in microseconds
      * @see #IttDirectionExpl(Direction, int, Position, long)
      * @see #createExplosionGameObject(Position, long)
      */
@@ -383,7 +383,7 @@ public final class GameEngine {
      * @param dir direction
      * @param range the range of the Bomb
      * @param pos the original position
-     * @param now current time in nanoseconds
+     * @param now current time in microseconds
      */
     private void IttDirectionExpl(Direction dir, int range, Position pos, long now){
         Position p = pos;
@@ -402,7 +402,7 @@ public final class GameEngine {
 
     /** Check for the position p if there is a decor, a destructible object, the player or a monster
      * @param p possition we want to check
-     * @param now current time in nanosecond
+     * @param now current time in microseconds
      * @return -1 if we need to stop the explosion 0 otherwise
      */
     private int CheckPos(Position p, long now){

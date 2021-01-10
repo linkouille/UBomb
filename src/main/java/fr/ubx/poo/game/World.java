@@ -114,7 +114,6 @@ public class World {
         return position.inside(this.dimension); // to update
     }
 
-
     public boolean isEmpty(Position position) {
         return grid.get(position) == null;
     }

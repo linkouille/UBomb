@@ -49,7 +49,7 @@ public class Bomb extends GameObject{
      * @param game current game
      * @param position position of the Bomb
      * @param range range from {@link fr.ubx.poo.model.go.character.Player} can't be less than 1
-     * @param now current time in nanoseconds
+     * @param now current time in microseconds
      */
     public Bomb(Game game, Position position, int range, long now) {
         super(game, position);
@@ -65,7 +65,7 @@ public class Bomb extends GameObject{
 
     /**
      * Update Bomb timer and check if it's finished
-     * @param now current time in nanoseconds
+     * @param now current time in microseconds
      */
     public void update(long now){
 
